@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>G2G Browser</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+<!--
+
+body { font-family: 'Courier New'; }
+img { float:right; }
+t { color:gray; }
+textarea {
+  width: 100%;
+  font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
+  tab-size: 16;
+}
+  
+-->
+    </style>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+
+$(function() {
+  $('button').click( function() {
+    $.ajax({
+      url: "http://192.168.56.122:8080/g2g/",
+      type: "POST",
+      dataType: "json",
+      data: {rdf: $("#rdf").val(), g2g: $("#g2g").val()},
+    }).done(function(res) {
+      $("#pg").val(res.pg);
+    }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+      alert("error");
+    })
+  });
+});
+
+$('textarea').on('keydown', function(e){
+    if (e.keyCode === 9) {
+        e.preventDefault();
+        var elem = e.target;
+        var val = elem.value;
+        var pos = elem.selectionStart;
+        elem.value = val.substr(0, pos) + '\t' + val.substr(pos, val.length);
+        elem.setSelectionRange(pos + 1, pos + 1);
+    }
+});
+
+$.get("g2gml/examples/mini_01.ttl", function(data) {
+  $("#rdf").val(data);
+});
+
+$.get("g2gml/examples/mini_01.g2g", function(data) {
+  $("#g2g").val(data);
+});
+
+    </script>
+    <div>
+      <img src="https://avatars2.githubusercontent.com/u/34002183?s=200&v=4" width="60">
+      <h2>G2G Browser</h2>
+    </div>
+    <p id="aa">RDF Data</p>
+    <textarea id="rdf" rows="5"></textarea>
+    <p>G2GML</p>
+    <textarea id="g2g" rows="10"></textarea>
+    <p/>
+    <div align="center">
+      <button>Submit</button>
+    </div>
+    <p>PG Data</p>
+    <textarea id="pg" rows="5"></textarea>
+    <p>Graphviz</p>
+  </body>
+</html>
