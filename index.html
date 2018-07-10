@@ -24,6 +24,8 @@ textarea {
 
 $(function() {
   $('button').click( function() {
+    $('#pg').val('');
+    $('img').attr('src', './img/g2g_animation.png');
     $.ajax({
       url: "http://192.168.56.122:8080/g2g/",
       type: "POST",
@@ -31,6 +33,7 @@ $(function() {
       data: {rdf: $("#rdf").val(), g2g: $("#g2g").val()},
     }).done(function(res) {
       $("#pg").val(res.pg);
+      $('img').attr('src', './img/g2g_static.png');
     }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
       alert("error");
     })
@@ -58,7 +61,7 @@ $.get("g2gml/examples/mini_01.g2g", function(data) {
 
     </script>
     <div>
-      <img src="https://avatars2.githubusercontent.com/u/34002183?s=200&v=4" width="60">
+      <img src="./img/g2g_static.png" width='60'>
       <h2>G2G Browser</h2>
     </div>
     <p id="aa">RDF Data</p>
