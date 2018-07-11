@@ -27,28 +27,34 @@ $(function() {
     $('#pg').val('');
     $('img').attr('src', './img/g2g_animation.png');
     $.ajax({
-      url: "http://192.168.56.122:8080/g2g/",
+      url: "http://18.182.137.114:8080/g2g/",
       type: "POST",
       dataType: "json",
-      data: {rdf: $("#rdf").val(), g2g: $("#g2g").val()},
+      data: {
+        rdf: $("#rdf").val(),
+        g2g: $("#g2g").val()
+      },
     }).done(function(res) {
-      $("#pg").val(res.pg);
+      $('#pg').val(res.pg)
+              .css({'color': ''});
       $('img').attr('src', './img/g2g_static.png');
     }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
-      alert("error");
+      $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
+              .css({'color': 'red'});
+      $('img').attr('src', './img/g2g_static.png');
     })
   });
 });
 
 $('textarea').on('keydown', function(e){
-    if (e.keyCode === 9) {
-        e.preventDefault();
-        var elem = e.target;
-        var val = elem.value;
-        var pos = elem.selectionStart;
-        elem.value = val.substr(0, pos) + '\t' + val.substr(pos, val.length);
-        elem.setSelectionRange(pos + 1, pos + 1);
-    }
+  if (e.keyCode === 9) {
+    e.preventDefault();
+    var elem = e.target;
+    var val = elem.value;
+    var pos = elem.selectionStart;
+    elem.value = val.substr(0, pos) + '\t' + val.substr(pos, val.length);
+    elem.setSelectionRange(pos + 1, pos + 1);
+  }
 });
 
 $.get("g2gml/examples/mini_01.ttl", function(data) {
