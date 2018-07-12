@@ -1,14 +1,13 @@
 
-var express = require('express');
 var bodyParser = require('body-parser');
+var childProcess = require('child_process');
 var fs = require('fs');
+var express = require('express');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
-var childProcess = require('child_process');
 
 var port=8080;
-var date = new Date();
-const execSync = childProcess.execSync;
+const exec = childProcess.exec;
 
 // WEB SERVER
 var app = express();
@@ -23,6 +22,7 @@ app.listen(port);
 console.log('Listening port is ' + port);
 
 app.post('/g2g/', function(req, res){
+  var date = new Date();
   var id = date.getTime();
   console.log("A request is received (ID: " + id + ")");
   mkdirp('./tmp/' + id, function(err) {
@@ -34,11 +34,21 @@ app.post('/g2g/', function(req, res){
       if (err) { console.log(err); };
       fs.writeFile(g2g_file, req.body.g2g, function (err) {
         if (err) { console.log(err); };
-        var result = execSync('g2g pg ' + g2g_file + ' ' + rdf_file + ' ./tmp/' + id).toString();
-        var pg_data = fs.readFileSync(pg_file, 'utf8');
-        console.log(pg_data);
-        var body = { pg:pg_data };
-        returnResult(res, body);
+        var cmd = 'g2g dot ' + g2g_file + ' ' + rdf_file + ' ./tmp/' + id;
+        exec(cmd, (err, stdout, stderr) => {
+          if (err) { pg_data = err; };
+          mkdirp('/var/www/html/tmp/' + id, function(err) {
+            var cmd_dot = 'dot -Tpng < ./tmp/' + id + '/tmp.dot > /var/www/html/tmp/' + id + '/tmp.png';
+            exec(cmd_dot, (err, stdout, stderr) => {
+              if (err) { console.log(err); };
+              var pg_data = fs.readFileSync(pg_file, 'utf8');
+              console.log(pg_data);
+              var vis_path = 'tmp/' + id + '/tmp.png';
+              var body = { pg:pg_data, vis:vis_path };
+              returnResult(res, body);
+            });
+          });
+        });
       });
     });
   });

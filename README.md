@@ -20,3 +20,10 @@
     $ npm link
     $ mkdir /var/www/html/g2gml
     $ cp -r examples /var/www/html/g2gml/
+
+    $ cd
+    $ git clone https://github.com/g2gml/pg.git
+    $ npm install
+    $ npm link
+
+    $ yum install graphviz
