@@ -25,6 +25,7 @@ textarea {
 $(function() {
   $('button').click( function() {
     $('#pg').val('');
+    $('#dot').val('');
     $('img#vis').attr('src', '');
     $('img#logo').attr('src', './img/g2g_animation.png');
     $.ajax({
@@ -38,11 +39,13 @@ $(function() {
     }).done(function(res) {
       $('#pg').val(res.pg)
               .css({'color': ''});
+      $('#dot').val(res.dot);
       $('img#vis').attr('src', res.vis);
       $('img#logo').attr('src', './img/g2g_static.png');
     }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
               .css({'color': 'red'});
+      $('#dot').val('');
       $('img#vis').attr('src', '');
       $('img#logo').attr('src', './img/g2g_static.png');
     })
@@ -83,6 +86,8 @@ $.get("g2gml/examples/mini_01.g2g", function(data) {
     </div>
     <p>PG Data</p>
     <textarea id="pg" rows="5"></textarea>
+    <p>Dot Data</p>
+    <textarea id="dot" rows="5"></textarea>
     <p>Graphviz</p>
       <img id='vis' src="">
   </body>
