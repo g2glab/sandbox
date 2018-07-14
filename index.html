@@ -63,11 +63,12 @@ $('textarea').on('keydown', function(e){
   }
 });
 
-$.get("g2gml/examples/mini_01.ttl", function(data) {
+//$.get("g2gml/examples/mini_01.ttl", function(data) {
+$.get("https://raw.githubusercontent.com/g2gml/g2gml/master/examples/mini_01.ttl", function(data) {
   $("#rdf").val(data);
 });
 
-$.get("g2gml/examples/mini_01.g2g", function(data) {
+$.get("https://raw.githubusercontent.com/g2gml/g2gml/master/examples/mini_01.g2g", function(data) {
   $("#g2g").val(data);
 });
 
