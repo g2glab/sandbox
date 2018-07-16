@@ -5,25 +5,29 @@
 * Git
 * Node
 * Jena (+ Java)
+* Graphviz
+
+    $ sudo yum -y install git graphviz
 
 ## Install
 
-    $ cd
     $ git clone https://github.com/g2gml/browser.git
-    $ cd ~/browser
+    $ cd browser
     $ npm install
     $ cp index.html /var/www/html/
 
-    $ cd
     $ git clone https://github.com/g2gml/g2gml.git
+    $ cd g2gml
     $ npm install
     $ npm link
-    $ mkdir /var/www/html/g2gml
-    $ cp -r examples /var/www/html/g2gml/
 
-    $ cd
     $ git clone https://github.com/g2gml/pg.git
+    $ cd pg
     $ npm install
     $ npm link
 
-    $ yum install graphviz
+## Run
+
+    $ cd browser
+    $ sh restart-server.sh
+
