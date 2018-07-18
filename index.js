@@ -6,16 +6,11 @@ $(function() {
     load_example();
   });
   $('#examples').change(function() {
+    clear_output();
     load_example();
   });
   $('button').click( function() {
-    $('#pg').val('');
-    $('#dot').val('');
-    $('#neo_n').val('');
-    $('#neo_e').val('');
-    $('#pgx_n').val('');
-    $('#pgx_e').val('');
-    $('img#vis').attr('src', '');
+    clear_output();
     $('img#logo').attr('src', './img/g2g_animation.png');
     $.ajax({
       url: "http://192.168.56.122:8080/g2g/",
@@ -67,6 +62,16 @@ $('textarea').on('keydown', function(e){
     elem.setSelectionRange(pos + 1, pos + 1);
   }
 });
+
+var clear_output = function(callback) {
+  $('#pg').val('');
+  $('#dot').val('');
+  $('#neo_n').val('');
+  $('#neo_e').val('');
+  $('#pgx_n').val('');
+  $('#pgx_e').val('');
+  $('img#vis').attr('src', '');
+}
 
 var list_examples = function(callback) {
   $.getJSON(github_dir + "examples.json", function(data) {
