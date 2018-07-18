@@ -11,10 +11,14 @@ $(function() {
   $('button').click( function() {
     $('#pg').val('');
     $('#dot').val('');
+    $('#neo_n').val('');
+    $('#neo_e').val('');
+    $('#pgx_n').val('');
+    $('#pgx_e').val('');
     $('img#vis').attr('src', '');
     $('img#logo').attr('src', './img/g2g_animation.png');
     $.ajax({
-      url: "http://18.182.137.114:8080/g2g/",
+      url: "http://192.168.56.122:8080/g2g/",
       type: "POST",
       dataType: "json",
       data: {
@@ -22,10 +26,26 @@ $(function() {
         g2g: $("#g2g").val()
       },
     }).done(function(res) {
-      $('#pg').val(res.pg)
-              .css({'color': ''});
+      $.get(res.dir_out + '/tmp.pg', function(data) {
+        $("#pg").val(data);
+      });
+      $.get(res.dir_out + '/tmp.dot', function(data) {
+        $("#dot").val(data);
+      });
+      $.get(res.dir_out + '/neo/tmp.neo.nodes', function(data) {
+        $("#neo_n").val(data);
+      });
+      $.get(res.dir_out + '/neo/tmp.neo.edges', function(data) {
+        $("#neo_e").val(data);
+      });
+      $.get(res.dir_out + '/pgx/tmp.pgx.nodes', function(data) {
+        $("#pgx_n").val(data);
+      });
+      $.get(res.dir_out + '/pgx/tmp.pgx.edges', function(data) {
+        $("#pgx_e").val(data);
+      });
       $('#dot').val(res.dot);
-      $('img#vis').attr('src', res.vis);
+      $('img#vis').attr('src', res.dir_out + '/tmp.png');
       $('img#logo').attr('src', './img/g2g_static.png');
     }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
