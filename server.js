@@ -35,7 +35,7 @@ app.post('/g2g/', function(req, res){
       if (err) { console.log(err); };
       fs.writeFile(g2g_file, req.body.g2g, function (err) {
         if (err) { console.log(err); };
-        var cmd = 'g2g -f dot ' + g2g_file + ' ' + rdf_file + ' -o ./tmp/' + id;
+        var cmd = 'g2g -f all ' + g2g_file + ' ' + rdf_file + ' -o ./tmp/' + id;
         exec(cmd, (err, stdout, stderr) => {
           if (err) { pg_data = err; };
           mkdirp('/var/www/html/tmp/' + id, function(err) {
