@@ -30,7 +30,7 @@ app.post('/g2g/', function(req, res){
   var dir_out = dir_root + '/tmp/' + id;
   var url_out = url_root + '/tmp/' + id;
   console.log("A request is received (ID: " + id + ")");
-  mkdirp('./tmp/' + id, function(err) {
+  mkdirp(dir_out, function(err) {
     if (err) { console.log(err); };
     var rdf_file = dir_out + '/tmp.ttl';
     var g2g_file = dir_out + '/tmp.g2g';
@@ -41,6 +41,7 @@ app.post('/g2g/', function(req, res){
       fs.writeFile(g2g_file, req.body.g2g, function (err) {
         if (err) { console.log(err); };
         var cmd = 'g2g -f all ' + g2g_file + ' ' + rdf_file + ' -o ' + dir_out;
+        console.log(cmd);
         exec(cmd, (err, stdout, stderr) => {
           if (err) { pg_data = err; };
           var cmd_dot = 'dot -Tpng < ' + dot_file + ' > ' + png_file;
