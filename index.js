@@ -1,6 +1,14 @@
 
 var github_dir = 'https://raw.githubusercontent.com/g2gml/g2gml/master/examples/';
 
+var waiting_logos = [
+  './img/g2g_noisy.png',
+  './img/g2g_sliding.png',
+  './img/g2g_turning.png',
+  './img/g2g_zooming.png',
+  './img/g2g_fading.png'
+];
+
 $(function() {
   list_examples( function() {
     load_example();
@@ -11,7 +19,8 @@ $(function() {
   });
   $('button').click( function() {
     clear_output();
-    $('img#logo').attr('src', './img/g2g_animation.png');
+    var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
+    $('img#logo').attr('src', logo);
     $.ajax({
       url: "http://192.168.56.122:8080/g2g/",
       type: "POST",
