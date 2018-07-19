@@ -1,5 +1,5 @@
 
-var github_dir = 'https://raw.githubusercontent.com/g2gml/g2gml/master/examples/';
+var github_dir = 'https://raw.githubusercontent.com/g2gml/g2g/master/examples/';
 
 var waiting_logos = [
   './img/g2g_noisy.png',
