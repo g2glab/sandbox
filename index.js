@@ -22,7 +22,7 @@ $(function() {
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
     $('img#logo').attr('src', logo);
     $.ajax({
-      url: "http://192.168.56.122:8080/g2g/",
+      url: "http://g2g.bio:8080/g2g/",
       type: "POST",
       dataType: "json",
       data: {
@@ -47,6 +47,12 @@ $(function() {
       });
       $.get(res.dir_out + '/pgx/tmp.pgx.edges', function(data) {
         $("#pgx_e").val(data);
+      });
+      $.get(res.dir_out + '/aws/tmp.aws.nodes', function(data) {
+        $("#aws_n").val(data);
+      });
+      $.get(res.dir_out + '/aws/tmp.aws.edges', function(data) {
+        $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
       $('img#vis').attr('src', res.dir_out + '/tmp.png');
@@ -79,6 +85,8 @@ var clear_output = function(callback) {
   $('#neo_e').val('');
   $('#pgx_n').val('');
   $('#pgx_e').val('');
+  $('#aws_n').val('');
+  $('#aws_e').val('');
   $('img#vis').attr('src', '');
 }
 
