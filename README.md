@@ -7,7 +7,11 @@
 * Jena (+ Java)
 * Graphviz
 
+Example of their installation process:
+
     $ sudo yum -y install git graphviz
+    $ tar xvJf node-v8.9.1-linux-x64.tar.xz
+    ...
 
 ## Install
 
