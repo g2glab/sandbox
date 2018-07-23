@@ -1,4 +1,4 @@
-# browser
+# Sandbox
 
 ## Pre-requirement
 
@@ -11,13 +11,13 @@
 
 ## Install
 
-    $ git clone https://github.com/g2gml/browser.git
-    $ cd browser
+    $ git clone https://github.com/g2gml/sandbox.git
+    $ cd sandbox
     $ npm install
     $ cp index.html /var/www/html/
 
-    $ git clone https://github.com/g2gml/g2gml.git
-    $ cd g2gml
+    $ git clone https://github.com/g2gml/g2g.git
+    $ cd g2g
     $ npm install
     $ npm link
 
@@ -28,6 +28,5 @@
 
 ## Run
 
-    $ cd browser
+    $ cd sandbox
     $ sh restart-server.sh
-
