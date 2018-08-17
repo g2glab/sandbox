@@ -1,13 +1,14 @@
-# Sandbox
+# Sandbox Web Application
 
 version 0.1.0
 
-## Pre-requirement
+## Requirements
 
 * Git
 * Node
-* Jena (+ Java)
+* Java + Jena
 * Graphviz
+* G2G + PG
 
 Example of their installation process:
 
