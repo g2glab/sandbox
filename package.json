@@ -1,7 +1,12 @@
 {
-  "name": "browser",
-  "version": "0.0.1",
-  "description": "g2g browser",
+  "name": "sandbox",
+  "version": "0.1.0",
+  "description": "sandbox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g2gml/sandbox.git"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "child_process": "^1.0.2",
