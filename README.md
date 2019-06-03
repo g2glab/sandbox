@@ -18,17 +18,17 @@ Example of their installation process:
 
 ## Install
 
-    $ git clone -b v0.1.0 https://github.com/g2gml/sandbox.git
+    $ git clone -b v0.1.0 https://github.com/g2glab/sandbox.git
     $ cd sandbox
     $ npm install
     $ cp index.html /var/www/html/
 
-    $ git clone -b v0.1.0 https://github.com/g2gml/g2g.git
+    $ git clone -b v0.1.0 https://github.com/g2glab/g2g.git
     $ cd g2g
     $ npm install
     $ npm link
 
-    $ git clone -b v0.1.0 https://github.com/g2gml/pg.git
+    $ git clone -b v0.1.0 https://github.com/g2glab/pg.git
     $ cd pg
     $ npm install
     $ npm link
