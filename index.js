@@ -22,7 +22,7 @@ $(function() {
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
     $('img#logo').attr('src', logo);
     $.ajax({
-      url: "http://g2g.bio:8080/g2g/",
+      url: "http://localhost:8011/g2g/",
       type: "POST",
       dataType: "json",
       data: {
