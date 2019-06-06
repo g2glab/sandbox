@@ -1,5 +1,5 @@
 
-var github_dir = 'https://raw.githubusercontent.com/g2gml/g2g/master/examples/';
+var github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
 
 var waiting_logos = [
   './img/g2g_noisy.png',
@@ -22,7 +22,11 @@ $(function() {
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
     $('img#logo').attr('src', logo);
     $.ajax({
+<<<<<<< HEAD
       url: "http://localhost:8011/g2g/",
+=======
+      url: "http://g2g.fun:8080/g2g/",
+>>>>>>> 24bf972b40241f49190f58aa4d27ef60fcdc4318
       type: "POST",
       dataType: "json",
       data: {
