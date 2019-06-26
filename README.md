@@ -38,19 +38,18 @@ Example of their installation process:
     $ cd sandbox
     $ sh restart-server.sh
 
-=====================================================
+## Use with Docker
 
-# Use with Docker
+You can run the sandbox using the latest published image as follows:
 
-After cloning the repository to your local machine you can build a Docker image with the included Dockerfile
-
-    $ docker build -t sandbox .
-
-For running a container from the built image, use the following command
-
-    $ docker run -d -p 8010:80 -p 8011:8080 --name sandbox sandbox
+    $ docker run -d -p 8010:80 -p 8011:8080 --name sandbox g2glab/sandbox:0.1.2
     $ docker exec sandbox service apache2 start
 
-You can then access the sandbox via http://localhost:8010 on your machine.
+Alternatively, you can build an image locally if you have cloned the repository to your machine:
+
+    $ cd $SANDBOX_PATH
+    $ docker build -t sandbox .
+
+When the container is running you can access the sandbox via http://localhost:8010 on your local machine.
 
 For future versions using Docker compose is being considered.
