@@ -6,7 +6,7 @@ RUN apt-get update \
     graphviz
 
 RUN cd /opt \
- && git clone -b v0.1.1 https://github.com/g2glab/sandbox.git \
+ && git clone https://github.com/g2glab/sandbox.git \
  && cd sandbox \
  && npm install
 
