@@ -5,12 +5,14 @@ RUN apt-get update \
     apache2 \
     graphviz
 
+WORKDIR /opt/sandbox
+
 RUN cd /opt \
  && git clone -b v0.1.1 https://github.com/g2glab/sandbox.git \
  && cd sandbox \
  && npm install \
- && cp index.html /var/www/html/
 
-RUN service apache2 start
+RUN cp index.* /var/www/html/ \ 
+ && cp -r /opt/sandbox/img /var/www/html/
 
-WORKDIR /work
+CMD ["service", "apache2", "start"]
