@@ -1,6 +1,6 @@
 # Sandbox Web Application
 
-version 0.1.0
+version 0.1.2
 
 ## Requirements
 
@@ -37,3 +37,20 @@ Example of their installation process:
 
     $ cd sandbox
     $ sh restart-server.sh
+
+=====================================================
+
+# Use with Docker
+
+After cloning the repository to your local machine you can build a Docker image with the included Dockerfile
+
+    $ docker build -t sandbox .
+
+For running a container from the built image, use the following command
+
+    $ docker run -d -p 8010:80 -p 8011:8080 --name sandbox sandbox
+    $ docker exec sandbox service apache2 start
+
+You can then access the sandbox via http://localhost:8010 on your machine.
+
+For future versions using Docker compose is being considered.
