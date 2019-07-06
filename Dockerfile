@@ -1,18 +1,16 @@
 FROM g2gml/g2g:0.3.4
 
+ENV G2GSANDBOX_EXTERNAL_HOST http://localhost
+ENV G2GSANDBOX_EXTERNAL_PORT 8080
+
 RUN apt-get update \
  && apt-get install -y \
-    apache2 \
     graphviz
-
-RUN cd /opt \
- && git clone https://github.com/g2glab/sandbox.git \
- && cd sandbox \
- && npm install
 
 WORKDIR /opt/sandbox
 
-RUN cp index.* /var/www/html/ \ 
- && cp -r /opt/sandbox/img /var/www/html/
+COPY . .
 
-ENTRYPOINT ["sh", "restart-server.sh"]
+RUN npm install
+
+ENTRYPOINT ["npm", "start"]
