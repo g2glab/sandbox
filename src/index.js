@@ -1,65 +1,65 @@
 
-var github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
+var sample_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
 
 var waiting_logos = [
-  './img/g2g_noisy.png',
-  './img/g2g_sliding.png',
-  './img/g2g_turning.png',
-  './img/g2g_zooming.png',
-  './img/g2g_fading.png'
+  '/img/g2g_noisy.png',
+  '/img/g2g_sliding.png',
+  '/img/g2g_turning.png',
+  '/img/g2g_zooming.png',
+  '/img/g2g_fading.png'
 ];
 
-$(function() {
-  list_examples( function() {
+$(function () {
+  list_examples(function () {
     load_example();
   });
-  $('#examples').change(function() {
+  $('#examples').change(function () {
     clear_output();
     load_example();
   });
-  $('button').click( function() {
+  $('button').click(function () {
     clear_output();
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
     $('img#logo').attr('src', logo);
     $.ajax({
-      url: "http://localhost:8011/g2g/",
+      url: location.protocol + "/g2g/",
       type: "POST",
       dataType: "json",
       data: {
         rdf: $("#rdf").val(),
         g2g: $("#g2g").val()
       },
-    }).done(function(res) {
-      $.get(res.dir_out + '/tmp.pg', function(data) {
+    }).done(function (res) {
+      $.get(res.g2g_output_dir + '/tmp.pg', function (data) {
         $("#pg").val(data);
       });
-      $.get(res.dir_out + '/tmp.dot', function(data) {
+      $.get(res.g2g_output_dir + '/tmp.dot', function (data) {
         $("#dot").val(data);
       });
-      $.get(res.dir_out + '/neo/tmp.neo.nodes', function(data) {
+      $.get(res.g2g_output_dir + '/neo/tmp.neo.nodes', function (data) {
         $("#neo_n").val(data);
       });
-      $.get(res.dir_out + '/neo/tmp.neo.edges', function(data) {
+      $.get(res.g2g_output_dir + '/neo/tmp.neo.edges', function (data) {
         $("#neo_e").val(data);
       });
-      $.get(res.dir_out + '/pgx/tmp.pgx.nodes', function(data) {
+      $.get(res.g2g_output_dir + '/pgx/tmp.pgx.nodes', function (data) {
         $("#pgx_n").val(data);
       });
-      $.get(res.dir_out + '/pgx/tmp.pgx.edges', function(data) {
+      $.get(res.g2g_output_dir + '/pgx/tmp.pgx.edges', function (data) {
         $("#pgx_e").val(data);
       });
-      $.get(res.dir_out + '/aws/tmp.aws.nodes', function(data) {
+      $.get(res.g2g_output_dir + '/aws/tmp.aws.nodes', function (data) {
         $("#aws_n").val(data);
       });
-      $.get(res.dir_out + '/aws/tmp.aws.edges', function(data) {
+      $.get(res.g2g_output_dir + '/aws/tmp.aws.edges', function (data) {
         $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
-      $('img#vis').attr('src', res.dir_out + '/tmp.png');
+      $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
       $('img#logo').attr('src', './img/g2g_static.png');
-    }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
-              .css({'color': 'red'});
+        .css({ 'color': 'red' });
       $('#dot').val('');
       $('img#vis').attr('src', '');
       $('img#logo').attr('src', './img/g2g_static.png');
@@ -67,7 +67,7 @@ $(function() {
   });
 });
 
-$('textarea').on('keydown', function(e){
+$('textarea').on('keydown', function (e) {
   if (e.keyCode === 9) {
     e.preventDefault();
     var elem = e.target;
@@ -78,7 +78,7 @@ $('textarea').on('keydown', function(e){
   }
 });
 
-var clear_output = function(callback) {
+var clear_output = function (callback) {
   $('#pg').val('');
   $('#dot').val('');
   $('#neo_n').val('');
@@ -90,22 +90,23 @@ var clear_output = function(callback) {
   $('img#vis').attr('src', '');
 }
 
-var list_examples = function(callback) {
-  $.getJSON(github_dir + "examples.json", function(data) {
-    for(var i = 0; i < data.length; i++) {
+var list_examples = function (callback) {
+  $.getJSON(sample_github_dir + "examples.json", function (data) {
+    for (var i = 0; i < data.length; i++) {
       var text = data[i].val + ' -- ' + data[i].text;
       $('#examples').append($('<option>').val(data[i].val).text(text));
       callback();
     }
-  }); 
+  });
 }
 
-var load_example = function() {
+var load_example = function () {
   var val = $('#examples').val();
-  $.get(github_dir + val + '/' + val + '.ttl', function(data) {
+  console.log(val)
+  $.get(sample_github_dir + val + '/' + val + '.ttl', function (data) {
     $("#rdf").val(data);
   });
-  $.get(github_dir + val + '/' + val + '.g2g', function(data) {
+  $.get(sample_github_dir + val + '/' + val + '.g2g', function (data) {
     $("#g2g").val(data);
   });
 }
