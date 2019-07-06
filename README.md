@@ -1,8 +1,24 @@
 # Sandbox Web Application
 
-version 0.1.2
+version 0.1.3
 
-## Requirements
+## Use with Docker
+
+You can run the sandbox using the latest published image as follows:
+
+    $ docker run -d -p 8080:8080 --name sandbox g2glab/sandbox:0.1.3
+
+Alternatively, you can build an image locally if you have cloned the repository to your machine:
+
+    $ cd $SANDBOX_PATH
+    $ docker build -t sandbox .
+    $ docker run -d -p 8080:8080 --name sandbox sandbox
+
+When the container is running you can access the sandbox on http://localhost:8080
+
+## Use without Docker
+
+### Requirements
 
 * Git
 * Node
@@ -16,40 +32,25 @@ Example of their installation process:
     $ tar xvJf node-v8.9.1-linux-x64.tar.xz
     ...
 
-## Install
+### Install
 
-    $ git clone -b v0.1.0 https://github.com/g2glab/sandbox.git
+    $ git clone https://github.com/g2glab/sandbox.git
     $ cd sandbox
     $ npm install
-    $ cp index.html /var/www/html/
+    $ export G2GSANDBOX_EXTERNAL_HOST="http://localhost"
+    $ export G2GSANDBOX_EXTERNAL_PORT="8080"
 
-    $ git clone -b v0.1.0 https://github.com/g2glab/g2g.git
+    $ git clone https://github.com/g2glab/g2g.git
     $ cd g2g
     $ npm install
     $ npm link
 
-    $ git clone -b v0.1.0 https://github.com/g2glab/pg.git
+    $ git clone https://github.com/g2glab/pg.git
     $ cd pg
     $ npm install
     $ npm link
 
-## Run
+### Run
 
     $ cd sandbox
-    $ sh restart-server.sh
-
-## Use with Docker
-
-You can run the sandbox using the latest published image as follows:
-
-    $ docker run -d -p 8010:80 -p 8011:8080 --name sandbox g2glab/sandbox:0.1.2
-    $ docker exec sandbox service apache2 start
-
-Alternatively, you can build an image locally if you have cloned the repository to your machine:
-
-    $ cd $SANDBOX_PATH
-    $ docker build -t sandbox .
-
-When the container is running you can access the sandbox via http://localhost:8010 on your local machine.
-
-For future versions using Docker compose is being considered.
+    $ npm run daemon
