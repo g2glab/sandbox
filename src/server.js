@@ -21,6 +21,15 @@ var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 const exec = childProcess.exec;
 
+// g2g output file path configuration
+const g2g_output_root = './static/tmp/'
+var id = new Date().getTime();
+const g2g_output_dir = g2g_output_root;
+const g2g_output_g2g = g2g_output_dir + '/tmp.g2g';
+const g2g_output_rdf = g2g_output_dir + '/tmp.ttl';
+const g2g_output_dot = g2g_output_dir + '/tmp.dot';
+const g2g_output_png = g2g_output_dir + '/tmp.png';
+
 // WEB SERVER
 var app = express();
 app.use(express.static('static'))
@@ -48,15 +57,6 @@ app.get('/server.js', function () {
 })
 
 app.post('/g2g/', function (req, res) {
-  // g2g output file path configuration
-  const g2g_output_root = './static/tmp/'
-  var id = new Date().getTime();
-  const g2g_output_dir = g2g_output_root + id;
-  const g2g_output_g2g = g2g_output_dir + '/tmp.g2g';
-  const g2g_output_rdf = g2g_output_dir + '/tmp.ttl';
-  const g2g_output_dot = g2g_output_dir + '/tmp.dot';
-  const g2g_output_png = g2g_output_dir + '/tmp.png';
-
   console.log("A request is received (ID: " + id + ")");
   mkdirp(g2g_output_dir, function (err) {
     if (err) { console.log(err); };
@@ -71,7 +71,7 @@ app.post('/g2g/', function (req, res) {
           var cmd_dot = 'dot -Tpng < ' + g2g_output_dot + ' > ' + g2g_output_png;
           exec(cmd_dot, (err, stdout, stderr) => {
             if (err) { console.log(err); };
-            var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/' + id };
+            var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/'};
             returnResult(res, body);
           });
         });
