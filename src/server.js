@@ -4,11 +4,11 @@
 
 // sandbox listening config
 var g2gsandbox_host = "http://localhost"
-if (process.env.G2GSANDBOX_EXTERNAL_HOST != "") {
+if (process.env.G2GSANDBOX_EXTERNAL_HOST != null) {
   g2gsandbox_host = process.env.G2GSANDBOX_EXTERNAL_HOST
 }
 var g2gsandbox_port = "8080"
-if (process.env.G2GSANDBOX_EXTERNAL_PORT != "") {
+if (process.env.G2GSANDBOX_EXTERNAL_PORT != null) {
   g2gsandbox_port = process.env.G2GSANDBOX_EXTERNAL_PORT
 }
 const g2gsandbox_external_url = g2gsandbox_host + ":" + g2gsandbox_port
