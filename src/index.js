@@ -26,8 +26,10 @@ $(function () {
       type: "POST",
       dataType: "json",
       data: {
+        g2g: $("#g2g").val(),
+        mode: $("input[name=mode]:checked").val(),
         rdf: $("#rdf").val(),
-        g2g: $("#g2g").val()
+        endpoint: $("#endpoint").val()
       },
     }).done(function (res) {
       $.get(res.g2g_output_dir + '/tmp.pg', function (data) {
