@@ -27,17 +27,17 @@ textarea {
       <h2>G2G Sandbox</h2>
     </div>
     <br />
-    <input type="radio" name="mode" value="rdf" checked="checked">Local File Mode
-    <input type="radio" name="mode" value="endpoint">Endpoint Mode
+    <input type="radio" id=rdf_radio name="mode" value="rdf" checked="checked">Local File Mode
+    <input type="radio" id=endpoint_radio name="mode" value="endpoint">Endpoint Mode
     <br />
     <br />
     <select id="examples">
     </select>
     <br />
-    <p>Endpoint</p>
-    <textarea id="endpoint" rows="1"></textarea>
-    <p>RDF</p>
-    <textarea id="rdf" rows="10"></textarea>
+    <p class="endpoint">Endpoint</p>
+    <textarea class="endpoint" id="endpoint" rows="1"></textarea>
+    <p class="rdf">RDF</p>
+    <textarea class="rdf" id="rdf" rows="10"></textarea>
     <p>G2GML</p>
     <textarea id="g2g" rows="10"></textarea>
     <p/>

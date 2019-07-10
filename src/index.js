@@ -17,6 +17,13 @@ $(function () {
     clear_output();
     load_example();
   });
+  
+  if ($("input[value=rdf]").is(":checked")){
+    $(".endpoint").hide();
+  } else {
+    $(".rdf").hide();
+  }; 
+
   $('button').click(function () {
     clear_output();
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
@@ -57,11 +64,11 @@ $(function () {
         $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
-      // $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
+      $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
       $('img#logo').attr('src', './img/g2g_static.png');
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
-        .css({ 'color': 'red' });
+      .css({ 'color': 'red' });
       $('#dot').val('');
       $('img#vis').attr('src', '');
       $('img#logo').attr('src', './img/g2g_static.png');
