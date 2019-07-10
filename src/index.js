@@ -57,7 +57,7 @@ $(function () {
         $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
-      $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
+      // $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
       $('img#logo').attr('src', './img/g2g_static.png');
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)

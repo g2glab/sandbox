@@ -73,13 +73,14 @@ app.post('/g2g/', function (req, res) {
       };
       console.log(cmd);
       exec(cmd, (err, stdout, stderr) => {
+        console.log(stdout, stderr);
         if (err) { pg_data = err; };
         var cmd_dot = 'dot -Tpng < ' + g2g_output_dot + ' > ' + g2g_output_png;
-        exec(cmd_dot, (err, stdout, stderr) => {
-          if (err) { console.log(err); };
-          var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/' + id };
-          returnResult(res, body);
-        });
+        // exec(cmd_dot, (err, stdout, stderr) => {
+        //   if (err) { console.log(err); };
+        // });
+        var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/' + id };
+        returnResult(res, body);
       });
     });
   });
