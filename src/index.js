@@ -18,11 +18,16 @@ $(function () {
     load_example();
   });
   
-  // if ($("input[value=rdf]").is(":checked")){
-  //   $(".endpoint").hide();
-  // } else {
-  //   $(".rdf").hide();
-  // }; 
+  $('input#rdf_radio,input#endpoint_radio').change(function () {
+    console.log('changed');
+      if ($('input#rdf_radio').is(":checked")){
+        $(".endpoint").hide();
+        $(".rdf").show();
+      } else {
+        $(".rdf").hide();
+        $(".endpoint").show();
+      }; 
+    });
 
   $('button').click(function () {
     clear_output();
