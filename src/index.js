@@ -18,11 +18,11 @@ $(function () {
     load_example();
   });
   
-  if ($("input[value=rdf]").is(":checked")){
-    $(".endpoint").hide();
-  } else {
-    $(".rdf").hide();
-  }; 
+  // if ($("input[value=rdf]").is(":checked")){
+  //   $(".endpoint").hide();
+  // } else {
+  //   $(".rdf").hide();
+  // }; 
 
   $('button').click(function () {
     clear_output();
@@ -64,7 +64,10 @@ $(function () {
         $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
-      $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
+      if ($("input[value=rdf]").is(":checked")){
+          $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
+        }; 
+      
       $('img#logo').attr('src', './img/g2g_static.png');
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
