@@ -18,8 +18,8 @@ $(function () {
     load_example();
   });
   
+  $(".endpoint").hide();
   $('input#rdf_radio,input#endpoint_radio').change(function () {
-    console.log('changed');
       if ($('input#rdf_radio').is(":checked")){
         $(".endpoint").hide();
         $(".rdf").show();
