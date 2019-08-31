@@ -1,0 +1,24 @@
+body { 
+  font-family: 'Courier New';
+  padding: 0; 
+}
+
+img#logo { 
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+
+}
+img#logo_bh { 
+  float: right; 
+}
+
+t { 
+  color:gray; 
+}
+
+textarea {
+  width: 100%;
+  font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
+  tab-size: 16;
+}
