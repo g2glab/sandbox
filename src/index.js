@@ -18,11 +18,12 @@ $(function () {
     load_example();
   });
   
-  $('input#rdf_radio,input#endpoint_radio').change(function () {
-    console.log('changed');
-      if ($('input#rdf_radio').is(":checked")){
-        $(".endpoint").hide();
+  // Local File Mode as default
+  $(".endpoint").hide();
+  $('input#mode_switch').change(function () {
+      if (!$('input#mode_switch').is(":checked")){
         $(".rdf").show();
+        $(".endpoint").hide();
       } else {
         $(".rdf").hide();
         $(".endpoint").show();
