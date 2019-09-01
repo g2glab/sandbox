@@ -30,6 +30,9 @@ $(function () {
       }; 
     });
 
+  //Hide output textarea until submit 
+  $(".output").hide();
+
   $('button').click(function () {
     clear_output();
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
@@ -45,6 +48,7 @@ $(function () {
         endpoint: $("#endpoint").val()
       },
     }).done(function (res) {
+      $(".output").show();
       $.get(res.g2g_output_dir + '/tmp.pg', function (data) {
         $("#pg").val(data);
       });

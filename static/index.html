@@ -17,36 +17,44 @@
       <input type="checkbox" id=mode_switch>
       <span class="slider round"></span>
     </label>
-    <br />
-    <br />
-    <select id="examples">
-    </select>
-    <br />
+    <br/>
+    <br/>
+    <select id="examples"></select>
+    <br/>
     <p class="endpoint">Endpoint</p>
-    <textarea class="endpoint" id="endpoint" rows="1"></textarea>
+      <textarea class="endpoint" id="endpoint" rows="1"></textarea>
     <p class="rdf">RDF</p>
-    <textarea class="rdf" id="rdf" rows="10"></textarea>
+      <textarea class="rdf" id="rdf" rows="10"></textarea>
     <p>G2GML</p>
-    <textarea id="g2g" rows="10"></textarea>
+      <textarea id="g2g" rows="10"></textarea>
     <p/>
     <div align="center">
       <button>Submit</button>
     </div>
-    <p>PG</p>
-    <textarea id="pg" rows="10"></textarea>
-    <p>Graphviz</p>
-    <textarea id="dot" rows="10"></textarea>
-    <p></p>
-    <img id='vis' src="">
-    <p>Neo4j</p>
-    <textarea id="neo_n" rows="10"></textarea>
-    <textarea id="neo_e" rows="10"></textarea>
-    <p>Oracle PGX</p>
-    <textarea id="pgx_n" rows="10"></textarea>
-    <textarea id="pgx_e" rows="10"></textarea>
-    <p>Amazon Neptune</p>
-    <textarea id="aws_n" rows="10"></textarea>
-    <textarea id="aws_e" rows="10"></textarea>
+    <div class="output">
+      <p>PG</p>
+        <textarea id="pg" rows="10"></textarea>
+      <br/>
+      <br/>
+      <p>Graphviz</p>
+        <textarea id="dot" rows="10"></textarea>
+        <img id='vis' src="">
+      <br/>
+      <br/>
+      <p>Neo4j</p>
+        Nodes<textarea id="neo_n" rows="10"></textarea>
+        Edges<textarea id="neo_e" rows="10"></textarea>
+      <br/>
+      <br/>
+      <p>Oracle PGX</p>
+        Nodes<textarea id="pgx_n" rows="10"></textarea>
+        Edges<textarea id="pgx_e" rows="10"></textarea>
+      <br/>
+      <br/>
+      <p>Amazon Neptune</p>
+        Nodes<textarea id="aws_n" rows="10"></textarea>
+        Edges<textarea id="aws_e" rows="10"></textarea>
+    </div>
     <div>
       <a href="http://biohackathon.org/"><img id="logo_bh" src="https://raw.githubusercontent.com/dbcls/website/master/img/ribbon/biohackathon_white.png"></a>
     </div>
