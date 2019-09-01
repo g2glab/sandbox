@@ -18,16 +18,20 @@ $(function () {
     load_example();
   });
   
+  // Local File Mode as default
   $(".endpoint").hide();
-  $('input#rdf_radio,input#endpoint_radio').change(function () {
-      if ($('input#rdf_radio').is(":checked")){
-        $(".endpoint").hide();
+  $('input#mode_switch').change(function () {
+      if (!$('input#mode_switch').is(":checked")){
         $(".rdf").show();
+        $(".endpoint").hide();
       } else {
         $(".rdf").hide();
         $(".endpoint").show();
       }; 
     });
+
+  //Hide output textarea until submit 
+  $(".output").hide();
 
   $('button').click(function () {
     clear_output();
@@ -44,6 +48,7 @@ $(function () {
         endpoint: $("#endpoint").val()
       },
     }).done(function (res) {
+      $(".output").show();
       $.get(res.g2g_output_dir + '/tmp.pg', function (data) {
         $("#pg").val(data);
       });

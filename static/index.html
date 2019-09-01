@@ -3,62 +3,58 @@
   <head>
     <title>G2G Sandbox</title>
     <meta charset="utf-8" />
-    <style type="text/css">
-<!--
-
-body { font-family: 'Courier New'; }
-img#logo { position: fixed; top: 0; right: 0; }
-img#logo_bh { float:right; }
-t { color:gray; }
-textarea {
-  width: 100%;
-  font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
-  tab-size: 16;
-}
-  
--->
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
   </head>
   <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./index.js"></script>
     <div>
       <img id='logo' src="./img/g2g_static.png" width='80'>
       <h2>G2G Sandbox</h2>
     </div>
-    <br />
-    <input type="radio" id=rdf_radio name="mode" value="rdf" checked="checked">Local File Mode
-    <input type="radio" id=endpoint_radio name="mode" value="endpoint">Endpoint Mode
-    <br />
-    <br />
-    <select id="examples">
-    </select>
-    <br />
+    <label class="switch">
+      <input type="checkbox" id=mode_switch>
+      <span class="slider round"></span>
+    </label>
+    <br/>
+    <br/>
+    <select id="examples"></select>
+    <br/>
     <p class="endpoint">Endpoint</p>
-    <textarea class="endpoint" id="endpoint" rows="1"></textarea>
+      <textarea class="endpoint" id="endpoint" rows="1"></textarea>
     <p class="rdf">RDF</p>
-    <textarea class="rdf" id="rdf" rows="10"></textarea>
+      <textarea class="rdf" id="rdf" rows="10"></textarea>
     <p>G2GML</p>
-    <textarea id="g2g" rows="10"></textarea>
+      <textarea id="g2g" rows="10"></textarea>
     <p/>
     <div align="center">
       <button>Submit</button>
     </div>
-    <p>PG</p>
-    <textarea id="pg" rows="10"></textarea>
-    <p>Graphviz</p>
-    <textarea id="dot" rows="10"></textarea>
-    <p></p>
-    <img id='vis' src="">
-    <p>Neo4j</p>
-    <textarea id="neo_n" rows="10"></textarea>
-    <textarea id="neo_e" rows="10"></textarea>
-    <p>Oracle PGX</p>
-    <textarea id="pgx_n" rows="10"></textarea>
-    <textarea id="pgx_e" rows="10"></textarea>
-    <p>Amazon Neptune</p>
-    <textarea id="aws_n" rows="10"></textarea>
-    <textarea id="aws_e" rows="10"></textarea>
+    <div class="output">
+      <p>PG</p>
+        <textarea id="pg" rows="10"></textarea>
+      <br/>
+      <br/>
+      <p>Graphviz</p>
+        <textarea id="dot" rows="10"></textarea>
+        <img id='vis' src="">
+      <br/>
+      <br/>
+      <p>Neo4j</p>
+        Nodes<textarea id="neo_n" rows="10"></textarea>
+        Edges<textarea id="neo_e" rows="10"></textarea>
+      <br/>
+      <br/>
+      <p>Oracle PGX</p>
+        Nodes<textarea id="pgx_n" rows="10"></textarea>
+        Edges<textarea id="pgx_e" rows="10"></textarea>
+      <br/>
+      <br/>
+      <p>Amazon Neptune</p>
+        Nodes<textarea id="aws_n" rows="10"></textarea>
+        Edges<textarea id="aws_e" rows="10"></textarea>
+    </div>
     <div>
       <a href="http://biohackathon.org/"><img id="logo_bh" src="https://raw.githubusercontent.com/dbcls/website/master/img/ribbon/biohackathon_white.png"></a>
     </div>
