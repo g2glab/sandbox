@@ -74,7 +74,7 @@ $(function () {
         $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
-      if ($("input[value=rdf]").is(":checked")){
+      if ($("input[value=endpoint]").is(":not(:checked)")){
           $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
         }; 
       
