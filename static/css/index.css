@@ -29,8 +29,8 @@ p {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 30px;
+  width: 40px;
+  height: 20px;
 }
 
 .switch input {
@@ -46,7 +46,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #39aec6;
+  background-color: #9ca5a7;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -54,8 +54,8 @@ p {
 .slider:before {
   position: absolute;
   content: "";
-  height: 22px;
-  width: 22px;
+  height: 12px;
+  width: 12px;
   left: 6px;
   bottom: 4px;
   background-color: white;
@@ -72,27 +72,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.slider:after
-{
- content:'Local File Mode';
- color: black;
- display: block;
- position: absolute;
- width: max-content;
- top: 20%;
- left: 110%;
- font-size: 14px;
- font-family: Verdana, sans-serif;
-}
-
-input:checked + .slider:after
-{  
-  content:'Endpoint Mode';
+  -webkit-transform: translateX(12px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
 }
 
 .slider.round {
