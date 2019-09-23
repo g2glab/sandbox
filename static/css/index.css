@@ -3,17 +3,20 @@ body {
   padding: 0; 
 }
 
+/* G2G logo */
 img#logo { 
   position: fixed; 
   top: 0; 
   right: 0; 
 }
+
+/* BioHackathon logo */
 img#logo_bh { 
   float: right; 
 }
 
-t { 
-  color:gray; 
+.button {
+  text-align: center;
 }
 
 textarea {
@@ -26,6 +29,7 @@ p {
   font-weight: 600;
 }
 
+/* Toggle Switch Box */
 .switch {
   position: relative;
   display: inline-block;
@@ -51,7 +55,7 @@ p {
   transition: .4s;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 12px;
@@ -68,10 +72,10 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px rgb(72, 95, 114);
 }
 
-input:checked + .slider:before {
+input:checked + .slider::before {
   -webkit-transform: translateX(12px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
@@ -81,6 +85,6 @@ input:checked + .slider:before {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.round::before {
   border-radius: 50%;
 }

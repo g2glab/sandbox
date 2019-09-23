@@ -33,6 +33,7 @@ $(function () {
   //Hide output textarea until submit 
   $(".output").hide();
 
+  //Submit
   $('button').click(function () {
     clear_output();
     var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
@@ -81,7 +82,7 @@ $(function () {
       $('img#logo').attr('src', './img/g2g_static.png');
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
-      .css({ 'color': 'red' });
+              .css({ 'color': 'red' });
       $('#dot').val('');
       $('img#vis').attr('src', '');
       $('img#logo').attr('src', './img/g2g_static.png');
