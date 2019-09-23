@@ -17,8 +17,7 @@
     "rimraf": "^2.6.2"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "daemon": "./node_modules/forever/bin/forever start -o server.log src/server.js",
+    "start": "./node_modules/forever/bin/forever start -o server.log src/server.js",
     "stop": "./node_modules/forever/bin/forever stop src/server.js",
     "restart": "./node_modules/forever/bin/forever restart src/server.js",
     "list": "./node_modules/forever/bin/forever list",
