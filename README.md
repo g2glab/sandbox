@@ -1,18 +1,26 @@
 # Sandbox Web Application
 
-version 0.1.3
+version 0.1.6
 
 ## Use with Docker
 
 You can run the sandbox using the latest published image as follows:
 
-    $ docker run -d -p 8080:8080 --name sandbox g2glab/sandbox:0.1.3
+    $ docker run -d \
+      -p 8080:8080 \
+      -v $HOME/sandbox_data:/opt/sandbox/static/tmp/ \
+      --name sandbox \
+      g2glab/sandbox:0.1.6
 
 Alternatively, you can build an image locally if you have cloned the repository to your machine:
 
     $ cd $SANDBOX_PATH
-    $ docker build -t sandbox .
-    $ docker run -d -p 8080:8080 --name sandbox sandbox
+    $ docker build -t g2g_sandbox .
+    $ docker run -d \
+    -p 8080:8080 \
+    -v $HOME/sandbox_data:/opt/sandbox/static/tmp/ \
+    --name sandbox \
+    g2g_sandbox
 
 When the container is running you can access the sandbox on http://localhost:8080
 
@@ -53,4 +61,4 @@ Example of their installation process:
 ### Run
 
     $ cd sandbox
-    $ npm run daemon
+    $ npm start
