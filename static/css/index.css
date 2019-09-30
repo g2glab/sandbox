@@ -22,7 +22,7 @@ img#logo_bh {
 textarea {
   width: 100%;
   font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
-  tab-size: 16;
+  tab-size: 4;
 }
 
 p {
