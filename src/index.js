@@ -1,7 +1,7 @@
 
-var sample_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
+const example_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
 
-var waiting_logos = [
+const waiting_logos = [
   '/img/g2g_noisy.png',
   '/img/g2g_sliding.png',
   '/img/g2g_turning.png',
@@ -36,7 +36,8 @@ $(function () {
   //Submit
   $('button').click(function () {
     clear_output();
-    var logo = waiting_logos[Math.floor(Math.random() * waiting_logos.length)];
+    var random = Math.floor(Math.random() * waiting_logos.length)
+    var logo = waiting_logos[random];
     $('img#logo').attr('src', logo);
     $.ajax({
       url: location.protocol + "/g2g/",
@@ -88,6 +89,8 @@ $(function () {
       $('img#logo').attr('src', './img/g2g_static.png');
     })
   });
+
+  //Enable writing tabs in textareas
   $('textarea').on('keydown', function (e) {
     if (e.keyCode === 9) {
       e.preventDefault();
@@ -114,22 +117,28 @@ var clear_output = function (callback) {
 }
 
 var list_examples = function (callback) {
-  $.getJSON(sample_github_dir + "examples.json", function (data) {
+  $.getJSON(example_github_dir + "examples.json", function (data) {
     for (var i = 0; i < data.length; i++) {
-      var text = data[i].val + ' -- ' + data[i].text;
-      $('#examples').append($('<option>').val(data[i].val).text(text));
+      var example_title = data[i].val;
+      var example_description = data[i].text;
+      var example_text = example_title + ' -- ' + example_description;
+      $('#examples').append($('<option>')
+                    .val(example_title)
+                    .text(example_text));
       callback();
     }
   });
 }
 
 var load_example = function () {
-  var val = $('#examples').val();
-  console.log(val)
-  $.get(sample_github_dir + val + '/' + val + '.ttl', function (data) {
+  var $val = $('#examples').val();
+  var example_ttl = $val + '/' + $val + '.ttl';
+  var example_g2g = $val + '/' + $val + '.g2g';
+
+  $.get(example_github_dir + example_ttl, function (data) {
     $("#rdf").val(data);
   });
-  $.get(sample_github_dir + val + '/' + val + '.g2g', function (data) {
+  $.get(example_github_dir + example_g2g, function (data) {
     $("#g2g").val(data);
   });
-}
+};

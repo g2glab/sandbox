@@ -3,15 +3,15 @@
 // $ node server.js
 
 // sandbox listening config
-var g2gsandbox_host = "http://localhost"
+var g2gsandbox_host = "http://localhost";
 if (process.env.G2GSANDBOX_EXTERNAL_HOST != null) {
   g2gsandbox_host = process.env.G2GSANDBOX_EXTERNAL_HOST
-}
-var g2gsandbox_port = "8080"
+};
+var g2gsandbox_port = "8080";
 if (process.env.G2GSANDBOX_EXTERNAL_PORT != null) {
   g2gsandbox_port = process.env.G2GSANDBOX_EXTERNAL_PORT
-}
-const g2gsandbox_external_url = g2gsandbox_host + ":" + g2gsandbox_port
+};
+const g2gsandbox_external_url = g2gsandbox_host + ":" + g2gsandbox_port;
 
 var bodyParser = require('body-parser');
 var childProcess = require('child_process');
@@ -37,20 +37,20 @@ console.log('Listening port is ' + g2gsandbox_port);
 
 app.get('/', function () {
   returnResult(res, "index.html")
-})
+});
 
 app.get('/index.js', function () { // テンプレート化までの暫定
   returnResult(res, "src/index.js")
-})
+});
 
 app.get('/server.js', function () {
   returnResult(res, "src/server.js")
-})
+});
 
 app.post('/g2g/', function (req, res) {
   // g2g output file path configuration
   var id = new Date().getTime();
-  const g2g_output_root = './static/tmp/'
+  const g2g_output_root = './static/tmp/';
   const g2g_output_dir = g2g_output_root + id;
   const g2g_output_g2g = g2g_output_dir + '/tmp.g2g';
   const g2g_output_rdf = g2g_output_dir + '/tmp.ttl';
