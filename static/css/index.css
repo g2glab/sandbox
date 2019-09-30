@@ -3,6 +3,16 @@ body {
   padding: 0; 
 }
 
+textarea {
+  width: 100%;
+  font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
+  tab-size: 4;
+}
+
+p {
+  font-weight: 600;
+}
+
 /* G2G logo */
 img#logo { 
   position: fixed; 
@@ -15,21 +25,12 @@ img#logo_bh {
   float: right; 
 }
 
+/* Submit button */
 .button {
   text-align: center;
 }
 
-textarea {
-  width: 100%;
-  font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
-  tab-size: 4;
-}
-
-p {
-  font-weight: 600;
-}
-
-/* Toggle Switch Box */
+/* Toggle switch */
 .switch {
   position: relative;
   display: inline-block;
@@ -37,12 +38,14 @@ p {
   height: 20px;
 }
 
+/* Make checkbox invisible */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
+/* Toggle switch box*/
 .slider {
   position: absolute;
   cursor: pointer;
@@ -51,10 +54,12 @@ p {
   right: 0;
   bottom: 0;
   background-color: #9ca5a7;
+  border-radius: 34px;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
+/* Toggle switch sliding element */
 .slider::before {
   position: absolute;
   content: "";
@@ -63,28 +68,19 @@ p {
   left: 6px;
   bottom: 4px;
   background-color: white;
+  border-radius: 50%;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
+/* Change colors on click */
 input:checked + .slider {
   background-color: #39aec6;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px rgb(72, 95, 114);
-}
-
+/* Make it slide */
 input:checked + .slider::before {
-  -webkit-transform: translateX(12px);
+  -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round::before {
-  border-radius: 50%;
 }
