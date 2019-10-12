@@ -1,10 +1,16 @@
-# Sandbox Web Application
+# G2G Sandbox
 
-version 0.1.6
+`version 0.1.6`
 
-## Use with Docker
+## Web Application
 
-You can run the sandbox using the latest published image as follows:
+You can find the sandbox at http://g2g.fun
+
+## Local usage
+
+### Use with Docker
+
+You can run the sandbox using Docker as follows:
 
     $ docker run -d \
       -p 8080:8080 \
@@ -22,43 +28,27 @@ Alternatively, you can build an image locally if you have cloned the repository 
     --name sandbox \
     g2g_sandbox
 
-When the container is running you can access the sandbox on http://localhost:8080
+When the container is running you can access the sandbox at http://localhost:8080
 
-## Use without Docker
+### Use without Docker
 
-### Requirements
+You can install the sandbox locally without Docker, but be sure that *all*  requirements listed below are installed on your machine and available in your $PATH.
 
 * Git
 * Node
-* Java + Jena
-* Graphviz
-* G2G + PG
-
-Example of their installation process:
-
-    $ sudo yum -y install git graphviz
-    $ tar xvJf node-v8.9.1-linux-x64.tar.xz
-    ...
-
-### Install
+* Java
+* [Apache Jena](https://jena.apache.org/download/index.cgi#apache-jena)
+* [Graphviz](https://graphviz.gitlab.io/download/)
+* [G2G](https://github.com/g2glab/g2g) + [PG](https://github.com/g2glab/pg) 
+  
+---
+Install:
 
     $ git clone https://github.com/g2glab/sandbox.git
     $ cd sandbox
     $ npm install
-    $ export G2GSANDBOX_EXTERNAL_HOST="http://localhost"
-    $ export G2GSANDBOX_EXTERNAL_PORT="8080"
 
-    $ git clone https://github.com/g2glab/g2g.git
-    $ cd g2g
-    $ npm install
-    $ npm link
-
-    $ git clone https://github.com/g2glab/pg.git
-    $ cd pg
-    $ npm install
-    $ npm link
-
-### Run
+Run:
 
     $ cd sandbox
     $ npm start
