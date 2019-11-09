@@ -23,8 +23,8 @@ const exec = childProcess.exec;
 
 // WEB SERVER
 var app = express();
-app.use(express.static('static'))
-app.use(express.static('src')) // テンプレート化までの暫定
+app.use(express.static('static'));
+app.use(express.static('src'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -39,12 +39,8 @@ app.get('/', function () {
   returnResult(res, "index.html")
 });
 
-app.get('/index.js', function () { // テンプレート化までの暫定
+app.get('/index.js', function () { 
   returnResult(res, "src/index.js")
-});
-
-app.get('/server.js', function () {
-  returnResult(res, "src/server.js")
 });
 
 app.post('/g2g/', function (req, res) {
@@ -73,7 +69,6 @@ app.post('/g2g/', function (req, res) {
         cmd_dot = 'dot -Tpng < ' + g2g_output_dot + ' > ' + g2g_output_png;
         cmd = 'g2g -f all ' + g2g_output_g2g + ' ' + g2g_output_rdf + ' -o ' + g2g_output_dir + ' && ' + cmd_dot;
       };
-      console.log("The mode is: " + req.body.mode);
       console.log(cmd);
       exec(cmd, (err, stdout, stderr) => {
         console.log(stdout, stderr);
