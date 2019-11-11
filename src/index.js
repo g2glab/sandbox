@@ -1,6 +1,6 @@
-const example_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
+var example_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
 
-const waiting_logos = [
+var waiting_logos = [
   '/img/g2g_noisy.png',
   '/img/g2g_sliding.png',
   '/img/g2g_turning.png',
@@ -8,18 +8,87 @@ const waiting_logos = [
   '/img/g2g_fading.png'
 ];
 
+function clear_output () {
+  $('#pg').val('');
+  $('#dot').val('');
+  $('#neo_n').val('');
+  $('#neo_e').val('');
+  $('#pgx_n').val('');
+  $('#pgx_e').val('');
+  $('#aws_n').val('');
+  $('#aws_e').val('');
+  $('img#vis').attr('src', '');
+}
+
+function list_examples (callback) {
+  $.getJSON(example_github_dir + "examples.json", function (data) {
+    for (var i = 0; i < data.length; i++) {
+      var example_title = data[i].val;
+      var example_description = data[i].text;
+      var example_text = example_title + ' -- ' + example_description;
+      $('#examples').append($('<option>')
+                    .val(example_title)
+                    .text(example_text));
+      callback();
+    }
+  });
+}
+
+function load_example () {
+  loader('start');
+
+  var $val = $('#examples').val();
+  var example_ttl = $val + '/' + $val + '.ttl';
+  var example_g2g = $val + '/' + $val + '.g2g';
+
+  var loadCount = 2; // number of resources to load
+  function loadExample(example, target) {
+    $.get(example_github_dir + example, function (data) {
+      target.val(data);
+      // decrease the number of resources to load
+      loadCount--;
+      if (loadCount == 0) loader('stop'); // stop loader when last resource is loaded
+    });  
+  }
+
+  loadExample(example_ttl, $("#rdf"));
+  loadExample(example_g2g, $("#g2g"));
+};
+
+
+// start / stop the loading animation
+function loader(operation) {
+  // when we are not starting, we are stopping
+  if (operation != 'start') {
+    $('img#logo').attr('src', './img/g2g_static.png');
+    return;
+  }
+
+  // choose a random logo, then display it
+  var random = Math.floor(Math.random() * waiting_logos.length)
+  var logo = waiting_logos[random];
+  $('img#logo').attr('src', logo);
+}
+
+
 // on document ready:
 $(function () {
+  //Hide output textarea until submit 
+  $(".output").hide();
+
+  // Local File Mode as default
+  $(".endpoint").hide();
+
+  // load example list, then load the first example from that list
   list_examples(function () {
     load_example();
   });
+  // load the new example once it's chosen in the dropdown
   $('#examples').change(function () {
     clear_output();
     load_example();
   });
   
-  // Local File Mode as default
-  $(".endpoint").hide();
   $('input#mode_switch').change(function (e) {
       if ($(e.target).is(":checked")){
         $(".rdf").hide();
@@ -29,9 +98,6 @@ $(function () {
         $(".endpoint").hide();
       }; 
     });
-
-  //Hide output textarea until submit 
-  $(".output").hide();
 
   //Submit
   $('form#input-form').on('submit', function (e) {
@@ -101,66 +167,3 @@ $(function () {
     }
   });
 });
-
-
-var clear_output = function (callback) {
-  $('#pg').val('');
-  $('#dot').val('');
-  $('#neo_n').val('');
-  $('#neo_e').val('');
-  $('#pgx_n').val('');
-  $('#pgx_e').val('');
-  $('#aws_n').val('');
-  $('#aws_e').val('');
-  $('img#vis').attr('src', '');
-}
-
-var list_examples = function (callback) {
-  $.getJSON(example_github_dir + "examples.json", function (data) {
-    for (var i = 0; i < data.length; i++) {
-      var example_title = data[i].val;
-      var example_description = data[i].text;
-      var example_text = example_title + ' -- ' + example_description;
-      $('#examples').append($('<option>')
-                    .val(example_title)
-                    .text(example_text));
-      callback();
-    }
-  });
-}
-
-var load_example = function () {
-  loader('start');
-
-  var $val = $('#examples').val();
-  var example_ttl = $val + '/' + $val + '.ttl';
-  var example_g2g = $val + '/' + $val + '.g2g';
-
-  var loadCount = 2; // number of resources to load
-  function loadExample(example, target) {
-    $.get(example_github_dir + example, function (data) {
-      target.val(data);
-      // decrease the number of resources to load
-      loadCount--;
-      if (loadCount == 0) loader('stop'); // stop loader when last resource is loaded
-    });  
-  }
-
-  loadExample(example_ttl, $("#rdf"));
-  loadExample(example_g2g, $("#g2g"));
-};
-
-
-// start / stop the loading animation
-function loader(operation) {
-  // when we are not starting, we are stopping
-  if (operation != 'start') {
-    $('img#logo').attr('src', './img/g2g_static.png');
-    return;
-  }
-
-  // choose a random logo, then display it
-  var random = Math.floor(Math.random() * waiting_logos.length)
-  var logo = waiting_logos[random];
-  $('img#logo').attr('src', logo);
-}
