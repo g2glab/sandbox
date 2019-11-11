@@ -10,66 +10,122 @@
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="./index.js"></script>
-  <div class="container">
-    <nav>
+  <script src="index.js"></script>
+  
+  <nav class="nav container">
+    <div class="nav-item">
       <img id='logo' src="./img/g2g_static.png" width='80'>
-      <h1>G2G Sandbox</h1>
+    </div>
+
+    <h1 class="nav-item">G2G Sandbox</h1>
+
+    <div class="nav-spacer"></div>
+
+    <div class="nav-item">
       <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" id="mode_switch" name="mode" value="endpoint">
         <label class="custom-control-label" for="mode_switch">Endpoint Mode</label>
       </div>
-    </nav>
-  </label>
-  <select id="examples"></select>
-  <p class="endpoint">Endpoint</p>
-  <form class="input-fields" id="input-form"></form>
-  <textarea class="endpoint" id="endpoint" rows="1">http://dbpedia.org/sparql</textarea>
-  <h2 class="rdf">RDF</h2>
-  <textarea class="rdf" id="rdf" rows="5"></textarea>
-  <h2>G2GML</h2>
-  <textarea id="g2g" rows="10"></textarea>
-  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="pg" autocomplete="off"> pg
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="pgx" autocomplete="off"> pgx
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="neo" autocomplete="off"> neo
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="dot" autocomplete="off"> dot
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="aws" autocomplete="off"> aws
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="all" autocomplete="off" checked> all
-    </label>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form class="input-fields" id="input-form">
+
+      <div class="form-group">
+        <label for="examples">Examples:</label>
+        <select class="form-control" id="examples"></select>
+      </div>
+
+      <div class="form-group endpoint" >
+        <label for="endpoint">Endpoint:</label>
+        <input id="endpoint" class="form-control" type="text" value="http://dbpedia.org/sparql"/>
+      </div>
+
+      <div class="form-group rdf">
+        <label for="rdf">RDF</label>
+        <textarea class="form-control" id="rdf" rows="10"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="g2g">G2Gml</label>
+        <textarea class="form-control" id="g2g" rows="10"></textarea>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="pg" autocomplete="off"> pg
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="pgx" autocomplete="off"> pgx
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="neo" autocomplete="off"> neo
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="dot" autocomplete="off"> dot
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="aws" autocomplete="off"> aws
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="all" autocomplete="off" checked> all
+        </label>
+      </div>
+
+      <button type="button" class="btn btn-primary">Submit</button>
+    </form>
+  <div class="output">
+
+    <h2>PG</h2>
+    <div class="form-group">
+      <label for="pg">PG</label>
+      <textarea class="form-control" id="pg" rows="10"></textarea>
+    </div>
+
+
+    <h2>Graphviz</h2>
+    <div class="form-group">
+      <label for="dot">Graphviz</label>
+      <textarea class="form-control" id="dot" rows="10"></textarea>
+    </div>
+
+    <h2>Neo4j</h2>
+    <div class="form-group">
+      <label for="neo_n">Nodes</label>
+      <textarea class="form-control" id="neo_n" rows="10"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="neo_e">Edges</label>
+      <textarea class="form-control" id="neo_e" rows="10"></textarea>
+    </div>
+
+    <h2>Oracle PGX</h2>
+    <div class="form-group">
+      <label for="pgx_n">Nodes</label>
+      <textarea class="form-control" id="pgx_n" rows="10"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="pgx_e">Edges</label>
+      <textarea class="form-control" id="pgx_e" rows="10"></textarea>
+    </div>
+
+    <h2>Amazon Neptune</h2>
+    <div class="form-group">
+      <label for="aws_n">Nodes</label>
+      <textarea class="form-control" id="aws_n" rows="10"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="aws_e">Edges</label>
+      <textarea class="form-control" id="aws_e" rows="10"></textarea>
+    </div>
   </div>
-  <button type="button" class="btn btn-primary">Submit</button>
-</form>
-<div class="output">
-  <h2>PG</h2>
-  <textarea id="pg" rows="10"></textarea>
-  <h2>Graphviz</h2>
-  <textarea id="dot" rows="10"></textarea>
-  <img id='vis' src="">
-  <h2>Neo4j</h2>
-  Nodes<textarea id="neo_n" rows="10"></textarea>
-  Edges<textarea id="neo_e" rows="10"></textarea>
-  <h2>Oracle PGX</h2>
-  Nodes<textarea id="pgx_n" rows="10"></textarea>
-  Edges<textarea id="pgx_e" rows="10"></textarea>
-  <h2>Amazon Neptune</h2>
-  Nodes<textarea id="aws_n" rows="10"></textarea>
-  Edges<textarea id="aws_e" rows="10"></textarea>
-</div>
-<div>
-  <a href="http://biohackathon.org/"><img id="logo_bh" src="https://raw.githubusercontent.com/dbcls/website/master/img/ribbon/biohackathon_white.png"></a>
-</div>
+  <div>
+    <a href="http://biohackathon.org/"><img id="logo_bh" src="https://raw.githubusercontent.com/dbcls/website/master/img/ribbon/biohackathon_white.png"></a>
+  </div>
 </div>
 </body>
 </html>

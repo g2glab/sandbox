@@ -34,7 +34,7 @@ $(function () {
   $(".output").hide();
 
   //Submit
-  $('button').click(function () {
+  $('form#input-form').submit(function () {
     clear_output();
     var random = Math.floor(Math.random() * waiting_logos.length)
     var logo = waiting_logos[random];
