@@ -42,7 +42,7 @@ function load_example () {
   var example_g2g = $val + '/' + $val + '.g2g';
 
   var loadCount = 2; // number of resources to load
-  function loadExample(example, target) {
+  function load_resource(example, target) {
     $.get(example_github_dir + example, function (data) {
       target.val(data);
       // decrease the number of resources to load
@@ -51,8 +51,8 @@ function load_example () {
     });  
   }
 
-  loadExample(example_ttl, $("#rdf"));
-  loadExample(example_g2g, $("#g2g"));
+  load_resource(example_ttl, $("#rdf"));
+  load_resource(example_g2g, $("#g2g"));
 };
 
 
@@ -89,6 +89,7 @@ $(function () {
     load_example();
   });
   
+  // handle switching of endpoint mode
   $('input#mode_switch').change(function (e) {
       if ($(e.target).is(":checked")){
         $(".rdf").hide();
