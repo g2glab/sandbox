@@ -8,7 +8,7 @@ var waiting_logos = [
   '/img/g2g_fading.png'
 ];
 
-function clear_output () {
+function clear_output() {
   $('#pg').val('');
   $('#dot').val('');
   $('#neo_n').val('');
@@ -20,21 +20,21 @@ function clear_output () {
   $('img#vis').attr('src', '');
 }
 
-function list_examples (callback) {
+function list_examples(callback) {
   $.getJSON(example_github_dir + "examples.json", function (data) {
     for (var i = 0; i < data.length; i++) {
       var example_title = data[i].val;
       var example_description = data[i].text;
       var example_text = example_title + ' -- ' + example_description;
       $('#examples').append($('<option>')
-                    .val(example_title)
-                    .text(example_text));
+        .val(example_title)
+        .text(example_text));
       callback();
     }
   });
 }
 
-function load_example () {
+function load_example() {
   loader('start');
 
   var $val = $('#examples').val();
@@ -48,7 +48,7 @@ function load_example () {
       // decrease the number of resources to load
       loadCount--;
       if (loadCount == 0) loader('stop'); // stop loader when last resource is loaded
-    });  
+    });
   }
 
   load_resource(example_ttl, $("#rdf"));
@@ -70,7 +70,6 @@ function loader(operation) {
   $('img#logo').attr('src', logo);
 }
 
-
 // on document ready:
 $(function () {
   //Hide output textarea until submit 
@@ -88,17 +87,17 @@ $(function () {
     clear_output();
     load_example();
   });
-  
+
   // handle switching of endpoint mode
   $('input#mode_switch').change(function (e) {
-      if ($(e.target).is(":checked")){
-        $(".rdf").hide();
-        $(".endpoint").show();
-      } else {
-        $(".rdf").show();
-        $(".endpoint").hide();
-      }; 
-    });
+    if ($(e.target).is(":checked")) {
+      $(".rdf").hide();
+      $(".endpoint").show();
+    } else {
+      $(".rdf").show();
+      $(".endpoint").hide();
+    };
+  });
 
   //Submit
   $('form#input-form').on('submit', function (e) {
@@ -144,15 +143,15 @@ $(function () {
         $("#aws_e").val(data);
       });
       $('#dot').val(res.dot);
-      if ($("input[value=endpoint]").is(":not(:checked)")){
-          $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
-        }; 
-      
-      
+      if ($("input[value=endpoint]").is(":not(:checked)")) {
+        $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
+      };
+
+
       loader('stop');
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
-              .css({ 'color': 'red' });
+        .css({ 'color': 'red' });
       $('#dot').val('');
       $('img#vis').attr('src', '');
       loader('stop');
