@@ -10,3 +10,7 @@ nav.nav .nav-item {
 nav.nav .nav-spacer {
   flex-grow: 1;
 }
+
+footer {
+  margin-top: 32px;
+}
