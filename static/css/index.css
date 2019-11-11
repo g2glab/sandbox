@@ -1,86 +1,16 @@
-body { 
-  font-family: 'Courier New';
-  padding: 0; 
+nav {
+  margin-bottom: 32px;
 }
 
-textarea {
-  width: 100%;
-  font-family: 'Courier New', Courier, Consolas, Monaco, monospace;
-  tab-size: 4;
+nav.nav .nav-item {
+  display: flex;
+  align-items: center;
 }
 
-p {
-  font-weight: 600;
+nav.nav .nav-spacer {
+  flex-grow: 1;
 }
 
-/* G2G logo */
-img#logo { 
-  position: fixed; 
-  top: 0; 
-  right: 0; 
-}
-
-/* BioHackathon logo */
-img#logo_bh { 
-  float: right; 
-}
-
-/* Submit button */
-.button {
-  text-align: center;
-}
-
-/* Toggle switch */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 20px;
-}
-
-/* Make checkbox invisible */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Toggle switch box*/
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #9ca5a7;
-  border-radius: 34px;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-/* Toggle switch sliding element */
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 12px;
-  width: 12px;
-  left: 6px;
-  bottom: 4px;
-  background-color: white;
-  border-radius: 50%;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-/* Change colors on click */
-input:checked + .slider {
-  background-color: #39aec6;
-}
-
-/* Make it slide */
-input:checked + .slider::before {
-  -webkit-transform: translateX(16px);
-  -ms-transform: translateX(16px);
-  transform: translateX(16px);
+footer {
+  margin-top: 32px;
 }
