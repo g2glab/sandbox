@@ -102,6 +102,9 @@ $(function () {
 
   //Submit
   $('form#input-form').on('submit', function (e) {
+    // prevent form from being sent
+    e.preventDefault();
+
     clear_output();
     loader('start');
     $.ajax({

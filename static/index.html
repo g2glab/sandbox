@@ -43,37 +43,38 @@
       </div>
       
       <div class="form-group rdf">
-        <label for="rdf">RDF</label>
+        <label for="rdf">RDF:</label>
         <textarea class="form-control" id="rdf" rows="10"></textarea>
       </div>
       
       <div class="form-group">
-        <label for="g2g">G2Gml</label>
+        <label for="g2g">G2Gml:</label>
         <textarea class="form-control" id="g2g" rows="10"></textarea>
       </div>
       
+      <label>Select output format:</label>
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary">
-          <input type="radio" name="output" id="pg" value="pg" autocomplete="off"> pg
+          <input type="radio" name="output" value="pg" autocomplete="off"> pg
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="output" id="pgx" value="pgx" autocomplete="off"> pgx
+          <input type="radio" name="output" value="pgx" autocomplete="off"> pgx
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="output" id="neo" value="neo" autocomplete="off"> neo
+          <input type="radio" name="output" value="neo" autocomplete="off"> neo
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="output" id="dot" value="dot" autocomplete="off"> dot
+          <input type="radio" name="output" value="dot" autocomplete="off"> dot
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="output" id="aws" value="aws" autocomplete="off"> aws
+          <input type="radio" name="output" value="aws" autocomplete="off"> aws
         </label>
         <label class="btn btn-secondary active">
-          <input type="radio" name="output" id="all" value="all" autocomplete="off" checked="checked"> all
+          <input type="radio" name="output" value="all" autocomplete="off" checked="checked"> all
         </label>
       </div>
       
-      <button type="button" class="btn btn-primary float-right">Submit</button>
+      <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
     <div class="output">
       
@@ -89,6 +90,7 @@
         <label for="dot">Graphviz</label>
         <textarea class="form-control" id="dot" rows="10"></textarea>
       </div>
+      <img id='vis' src="">
       
       <h2>Neo4j</h2>
       <div class="form-group">
