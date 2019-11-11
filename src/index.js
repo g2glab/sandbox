@@ -34,11 +34,9 @@ $(function () {
   $(".output").hide();
 
   //Submit
-  $('form#input-form').submit(function () {
+  $('form#input-form').on('submit', function (e) {
     clear_output();
-    var random = Math.floor(Math.random() * waiting_logos.length)
-    var logo = waiting_logos[random];
-    $('img#logo').attr('src', logo);
+    loader('start');
     $.ajax({
       url: location.protocol + "/g2g/",
       type: "POST",
@@ -80,13 +78,14 @@ $(function () {
           $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
         }; 
       
-      $('img#logo').attr('src', './img/g2g_static.png');
+      
+      loader('stop');
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
               .css({ 'color': 'red' });
       $('#dot').val('');
       $('img#vis').attr('src', '');
-      $('img#logo').attr('src', './img/g2g_static.png');
+      loader('stop');
     })
   });
 
@@ -131,14 +130,37 @@ var list_examples = function (callback) {
 }
 
 var load_example = function () {
+  loader('start');
+
   var $val = $('#examples').val();
   var example_ttl = $val + '/' + $val + '.ttl';
   var example_g2g = $val + '/' + $val + '.g2g';
 
-  $.get(example_github_dir + example_ttl, function (data) {
-    $("#rdf").val(data);
-  });
-  $.get(example_github_dir + example_g2g, function (data) {
-    $("#g2g").val(data);
-  });
+  var loadCount = 2; // number of resources to load
+  function loadExample(example, target) {
+    $.get(example_github_dir + example, function (data) {
+      target.val(data);
+      // decrease the number of resources to load
+      loadCount--;
+      if (loadCount == 0) loader('stop'); // stop loader when last resource is loaded
+    });  
+  }
+
+  loadExample(example_ttl, $("#rdf"));
+  loadExample(example_g2g, $("#g2g"));
 };
+
+
+// start / stop the loading animation
+function loader(operation) {
+  // when we are not starting, we are stopping
+  if (operation != 'start') {
+    $('img#logo').attr('src', './img/g2g_static.png');
+    return;
+  }
+
+  // choose a random logo, then display it
+  var random = Math.floor(Math.random() * waiting_logos.length)
+  var logo = waiting_logos[random];
+  $('img#logo').attr('src', logo);
+}
