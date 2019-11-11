@@ -1,4 +1,3 @@
-
 const example_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
 
 const waiting_logos = [
@@ -9,6 +8,7 @@ const waiting_logos = [
   '/img/g2g_fading.png'
 ];
 
+// on document ready:
 $(function () {
   list_examples(function () {
     load_example();
@@ -20,13 +20,13 @@ $(function () {
   
   // Local File Mode as default
   $(".endpoint").hide();
-  $('input#mode_switch').change(function () {
-      if (!$('input#mode_switch').is(":checked")){
-        $(".rdf").show();
-        $(".endpoint").hide();
-      } else {
+  $('input#mode_switch').change(function (e) {
+      if ($(e.target).is(":checked")){
         $(".rdf").hide();
         $(".endpoint").show();
+      } else {
+        $(".rdf").show();
+        $(".endpoint").hide();
       }; 
     });
 
