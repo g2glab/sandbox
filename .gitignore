@@ -1,6 +1,5 @@
 g2gml/
 node_modules/
 tmp/
-package-lock.json
 server.log
 npm-debug.log
