@@ -1,4 +1,4 @@
-FROM g2gml/g2g:0.3.4
+FROM g2glab/g2g:0.3.5
 
 ARG HOST=http://localhost
 ARG PORT=8080
