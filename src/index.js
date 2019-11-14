@@ -8,18 +8,6 @@ var waiting_logos = [
   '/img/g2g_fading.png'
 ];
 
-function clear_output() {
-  $('#pg').val('');
-  $('#dot').val('');
-  $('#neo_n').val('');
-  $('#neo_e').val('');
-  $('#pgx_n').val('');
-  $('#pgx_e').val('');
-  $('#aws_n').val('');
-  $('#aws_e').val('');
-  $('img#vis').attr('src', '');
-}
-
 function list_examples(callback) {
   $.getJSON(example_github_dir + "examples.json", function (data) {
     for (var i = 0; i < data.length; i++) {
@@ -70,11 +58,125 @@ function loader(operation) {
   $('img#logo').attr('src', logo);
 }
 
+/**
+ * Sends the request to the g2g endpoint
+ * @param {Object} options 
+ * 
+ */
+function send_request(options) {
+  // get mode and output format
+  var format = options.format;
+
+  // assemble body from subset of options
+  var body = {
+    g2g: options.g2g,
+    mode: options.mode,
+    rdf: options.rdf,
+    endpoint: options.endpoint
+  };
+
+  // clear output div
+  document.querySelector('#output').innerHTML = '';
+
+  // start loader
+  loader('start');
+
+  // fetch from server
+  fetch('/g2g', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(function (resp) {
+    if (resp.status == 200) return resp.json();
+
+    loader('stop');
+    display_error('Could not process request!', resp.status + ' - ' + resp.statusText);
+    throw new Error('Error processing request!');
+  }).then(function (json) {
+    var out_dir = json.g2g_output_dir;
+
+    render_response(out_dir, format).finally(function () {
+      // stop the loader after the rendering completes (doesn't matter if successfully or not)
+      loader('stop');
+    });
+  })
+}
+
+/**
+ * Display a dismissable error message inside the html container with id 'alert-container'
+ * @param {String} title the title of the error
+ * @param {Strin} message the error message (optional)
+ */
+function display_error(title, message) {
+  var alert = document.createElement('div');
+  alert.setAttribute('class', 'alert alert-danger alert-dismissible fade show');
+  alert.setAttribute('role', 'alert');
+
+  alert.innerHTML = '<strong>' + title + '</strong> ' + (message || '') + '\
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">\
+    <span aria-hidden="true">&times;</span>\
+  </button>';
+
+  document.querySelector('#alert-container').appendChild(alert);
+}
+
+/**
+ * Gets the required resources from the server and displays them in the output section
+ * @param {Strning} out_dir the path to where the output files are
+ * @param {String} format the desired output format. One of (pg|pgx|neo|dot|aws|all)
+ * @returns {Promise} a promise that resolves when all resources finished loading
+ */
+function render_response(out_dir, format) {
+  if (format == 'all') {
+    return Promise.all([
+      render_response(out_dir, 'pg'),
+      render_response(out_dir, 'pgx'),
+      render_response(out_dir, 'neo'),
+      render_response(out_dir, 'dot'),
+      render_response(out_dir, 'aws')
+    ]);
+  }
+
+  var root = document.querySelector('#output');
+
+  switch (format) {
+    case 'pg':
+    case 'dot':
+      return fetch_resource(out_dir + '/tmp.' + format).then(function (content) {
+        root.appendChild(output_view[format]({ content: content, image: out_dir + '/tmp.png' }));
+      });
+    case 'neo':
+    case 'pgx':
+    case 'aws':
+      return Promise.all([
+        fetch_resource(out_dir + '/' + format + '/tmp.' + format + '.nodes'),
+        fetch_resource(out_dir + '/' + format + '/tmp.' + format + '.edges'),
+      ]).then(function (contents) {
+        var nodes = contents[0];
+        var edges = contents[1];
+
+        root.appendChild(output_view[format]({ nodes: nodes, edges: edges }));
+      })
+  }
+}
+
+/**
+ * Fetches a (text) resource from the server and returns the content. Also renders an error 
+ * on request failure using @see display_error
+ * @param {String} resource url of the text resource to fetch
+ */
+function fetch_resource(resource) {
+  return fetch(resource).then(function (r) {
+    if (r.status == 200) return r.text();
+    display_error('Error loading resource ' + resource, 'Could not get the desired resource from the server! ' + r.textStatus)
+  })
+}
+
+
 // on document ready:
 $(function () {
-  //Hide output textarea until submit 
-  $(".output").hide();
-
   // Local File Mode as default
   $(".endpoint").hide();
 
@@ -84,13 +186,12 @@ $(function () {
   });
   // load the new example once it's chosen in the dropdown
   $('#examples').change(function () {
-    clear_output();
     load_example();
   });
 
   // handle switching of endpoint mode
-  $('input#mode_switch').change(function (e) {
-    if ($(e.target).is(":checked")) {
+  document.querySelector('input#mode_switch').addEventListener('change', function (e) {
+    if (e.target.checked) {
       $(".rdf").hide();
       $(".endpoint").show();
     } else {
@@ -100,61 +201,16 @@ $(function () {
   });
 
   //Submit
-  $('form#input-form').on('submit', function (e) {
+  document.querySelector('form#input-form').addEventListener('submit', function (e) {
     // prevent form from being sent
     e.preventDefault();
 
-    clear_output();
-    loader('start');
-    $.ajax({
-      url: location.protocol + "/g2g/",
-      type: "POST",
-      dataType: "json",
-      data: {
-        g2g: $("#g2g").val(),
-        mode: $("input[name=mode]:checked").val(),
-        rdf: $("#rdf").val(),
-        endpoint: $("#endpoint").val()
-      },
-    }).done(function (res) {
-      $(".output").show();
-      $.get(res.g2g_output_dir + '/tmp.pg', function (data) {
-        $("#pg").val(data);
-      });
-      $.get(res.g2g_output_dir + '/tmp.dot', function (data) {
-        $("#dot").val(data);
-      });
-      $.get(res.g2g_output_dir + '/neo/tmp.neo.nodes', function (data) {
-        $("#neo_n").val(data);
-      });
-      $.get(res.g2g_output_dir + '/neo/tmp.neo.edges', function (data) {
-        $("#neo_e").val(data);
-      });
-      $.get(res.g2g_output_dir + '/pgx/tmp.pgx.nodes', function (data) {
-        $("#pgx_n").val(data);
-      });
-      $.get(res.g2g_output_dir + '/pgx/tmp.pgx.edges', function (data) {
-        $("#pgx_e").val(data);
-      });
-      $.get(res.g2g_output_dir + '/aws/tmp.aws.nodes', function (data) {
-        $("#aws_n").val(data);
-      });
-      $.get(res.g2g_output_dir + '/aws/tmp.aws.edges', function (data) {
-        $("#aws_e").val(data);
-      });
-      $('#dot').val(res.dot);
-      if ($("input[value=endpoint]").is(":not(:checked)")) {
-        $('img#vis').attr('src', res.g2g_output_dir + '/tmp.png');
-      };
-
-
-      loader('stop');
-    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-      $('#pg').val('ERROR: ' + textStatus + ' ' + errorThrown)
-        .css({ 'color': 'red' });
-      $('#dot').val('');
-      $('img#vis').attr('src', '');
-      loader('stop');
+    send_request({
+      format: document.querySelector('input[type="radio"][name="output"]:checked').value,
+      g2g: document.querySelector("#g2g").value,
+      mode: document.querySelector("input#mode_switch:checked") ? 'endpoint' : 'rdf',
+      rdf: document.querySelector("#rdf").value,
+      endpoint: document.querySelector("#endpoint").value
     })
   });
 

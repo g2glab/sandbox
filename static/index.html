@@ -13,6 +13,7 @@
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="/src/views.js"></script>
   <script src="/src/index.js"></script>
 
   <nav class="nav container">
@@ -33,6 +34,8 @@
   </nav>
 
   <div class="container">
+    <div id="alert-container"></div>
+
     <form class="input-fields" id="input-form">
 
       <div class="form-group">
@@ -79,52 +82,7 @@
 
       <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
-    <div class="output">
-
-      <h2>PG</h2>
-      <div class="form-group">
-        <textarea class="form-control" id="pg" rows="10"></textarea>
-      </div>
-
-      <h2>Graphviz</h2>
-      <div class="form-group">
-        <textarea class="form-control" id="dot" rows="10"></textarea>
-      </div>
-      <img id='vis' src="">
-
-      <h2>Neo4j</h2>
-      <div class="form-group">
-        <label for="neo_n">Nodes</label>
-        <textarea class="form-control" id="neo_n" rows="10"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="neo_e">Edges</label>
-        <textarea class="form-control" id="neo_e" rows="10"></textarea>
-      </div>
-
-      <h2>Oracle PGX</h2>
-      <div class="form-group">
-        <label for="pgx_n">Nodes</label>
-        <textarea class="form-control" id="pgx_n" rows="10"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="pgx_e">Edges</label>
-        <textarea class="form-control" id="pgx_e" rows="10"></textarea>
-      </div>
-
-      <h2>Amazon Neptune</h2>
-      <div class="form-group">
-        <label for="aws_n">Nodes</label>
-        <textarea class="form-control" id="aws_n" rows="10"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="aws_e">Edges</label>
-        <textarea class="form-control" id="aws_e" rows="10"></textarea>
-      </div>
-    </div>
+    <div id="output"></div>
     <footer>
       <a href="http://biohackathon.org/" class="float-right"><img id="logo_bh"
           src="https://raw.githubusercontent.com/dbcls/website/master/img/ribbon/biohackathon_white.png"></a>
