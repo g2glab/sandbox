@@ -1,7 +1,7 @@
 /**
  * This file defines views for displaying the results from the server.
  * Each view is a simple, pure function that takes a JSON object as input 
- * and returns a jquery-wrapped dom node
+ * and returns a dom node
  * 
  * Created by Anton on the 11.11.2019
  */
