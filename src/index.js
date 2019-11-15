@@ -139,13 +139,13 @@ function render_response(out_dir, format) {
     ]);
   }
 
-  var root = document.querySelector('#output');
+  var outputNode = document.querySelector('#output');
 
   switch (format) {
     case 'pg':
     case 'dot':
       return fetch_resource(out_dir + '/tmp.' + format).then(function (content) {
-        root.appendChild(output_view[format]({ content: content, image: out_dir + '/tmp.png' }));
+        outputNode.appendChild(output_view[format]({ content: content, image: out_dir + '/tmp.png' }));
       });
     case 'neo':
     case 'pgx':
@@ -157,7 +157,7 @@ function render_response(out_dir, format) {
         var nodes = contents[0];
         var edges = contents[1];
 
-        root.appendChild(output_view[format]({ nodes: nodes, edges: edges }));
+        outputNode.appendChild(output_view[format]({ nodes: nodes, edges: edges }));
       })
   }
 }
@@ -171,6 +171,7 @@ function fetch_resource(resource) {
   return fetch(resource).then(function (r) {
     if (r.status == 200) return r.text();
     display_error('Error loading resource ' + resource, 'Could not get the desired resource from the server! ' + r.textStatus)
+    throw new Error('Could not load resource ' + resource);
   })
 }
 

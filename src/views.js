@@ -29,7 +29,6 @@
      * @param {String} html the html that needs to be converted to a dom node
      */
     function create_node(html) {
-        console.log(html);
         const div = document.createElement('div');
         div.innerHTML = html;
         return div;
@@ -38,7 +37,7 @@
     // expose our views to the global namespace
     global.output_view = {
         pg: function (info) {
-            return create_node('<h2>Postgres</h2> \
+            return create_node('<h2>PG</h2> \
             <div class="form-group">\
                 <textarea class="form-control" id="pg-output" rows="10">'+ escapeHtml(info.content) + '</textarea>\
             </div>');
