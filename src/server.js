@@ -51,6 +51,13 @@ app.post('/g2g/', function (req, res) {
   const g2g_output_png = g2g_output_dir + '/tmp.png';
 
   console.log("A request is received (ID: " + id + ")");
+
+  var format = req.body.format;
+  if (['pg', 'pgx', 'neo', 'dot', 'aws', 'all'].indexOf(format) == -1) {
+    console.log("Invalid output format specified: " + format);
+    return res.send(400);
+  }
+
   mkdirp(g2g_output_dir, function (err) {
     if (err) { console.log(err); };
     fs.writeFile(g2g_output_g2g, req.body.g2g, function (err) {
@@ -58,19 +65,19 @@ app.post('/g2g/', function (req, res) {
       var cmd_dot;
       if (err) { console.log(err); };
       if (req.body.mode == "endpoint") {
-        cmd = 'g2g -f all ' + g2g_output_g2g + ' ' + req.body.endpoint + ' -o ' + g2g_output_dir;
+        cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + req.body.endpoint + ' -o ' + g2g_output_dir;
       } else {
         fs.writeFile(g2g_output_rdf, req.body.rdf, function (err) {
           if (err) { console.log(err); };
         });
         cmd_dot = 'dot -Tpng < ' + g2g_output_dot + ' > ' + g2g_output_png;
-        cmd = 'g2g -f all ' + g2g_output_g2g + ' ' + g2g_output_rdf + ' -o ' + g2g_output_dir + ' && ' + cmd_dot;
+        cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + g2g_output_rdf + ' -o ' + g2g_output_dir + ' && ' + cmd_dot;
       };
       console.log(cmd);
       exec(cmd, (err, stdout, stderr) => {
         console.log(stdout, stderr);
         if (err) { pg_data = err; };
-        cmd = 'g2g -f all ' + g2g_output_g2g + ' ' + req.body.endpoint + ' -o ' + g2g_output_dir;
+        cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + req.body.endpoint + ' -o ' + g2g_output_dir;
         var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/' + id };
         returnResult(res, body);
       });

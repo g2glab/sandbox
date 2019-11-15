@@ -72,7 +72,8 @@ function send_request(options) {
     g2g: options.g2g,
     mode: options.mode,
     rdf: options.rdf,
-    endpoint: options.endpoint
+    endpoint: options.endpoint,
+    format: options.format
   };
 
   // clear output div
