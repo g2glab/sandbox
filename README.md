@@ -1,6 +1,6 @@
 # G2G Sandbox
 
-`version 0.1.6`
+`version 0.2.1`
 
 ## Web Application
 

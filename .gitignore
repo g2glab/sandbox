@@ -3,3 +3,6 @@ node_modules/
 tmp/
 server.log
 npm-debug.log
+
+# ignore editor settings
+.vscode
