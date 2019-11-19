@@ -39,13 +39,13 @@
         pg: function (info) {
             return create_node('<h2>PG</h2> \
             <div class="form-group">\
-                <textarea class="form-control" id="pg-output" rows="10">'+ escapeHtml(info.content) + '</textarea>\
+                <textarea class="form-control text-monospace" id="pg-output" rows="10">'+ escapeHtml(info.content) + '</textarea>\
             </div>');
         },
         dot: function (info) {
             return create_node('<h2>Graphviz</h2> \
             <div class="form-group"> \
-                <textarea class="form-control" id="pgx-output" rows="10">'+ escapeHtml(info.content) + '</textarea> \
+                <textarea class="form-control text-monospace" id="pgx-output" rows="10">'+ escapeHtml(info.content) + '</textarea> \
             </div>\
             <img src="'+ escapeHtml(info.image) + '"/>');
         },
@@ -53,33 +53,33 @@
             return create_node('<h2>Neo4j</h2>\
             <div class="form-group">\
                 <label for="neo-output-nodes">Nodes</label>\
-                <textarea class="form-control" id="neo-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
+                <textarea class="form-control text-monospace" id="neo-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
             </div>\
             <div class="form-group">\
                 <label for="neo-output-edges">Edges</label>\
-                <textarea class="form-control" id="neo-output-edges" rows="10">'+ escapeHtml(info.edges) + '</textarea>\
+                <textarea class="form-control text-monospace" id="neo-output-edges" rows="10">'+ escapeHtml(info.edges) + '</textarea>\
             </div>');
         },
         pgx: function (info) {
             return create_node('<h2>Oracle PGX</h2>\
             <div class="form-group">\
                 <label for="aws-output-nodes">Nodes</label>\
-                <textarea class="form-control" id="aws-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
+                <textarea class="form-control text-monospace" id="aws-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
             </div>\
             <div class="form-group">\
                 <label for="aws-output-edges">Edges</label>\
-                <textarea class="form-control" id="aws-output-edges" rows="10">'+ escapeHtml(info.edges) + '</textarea>\
+                <textarea class="form-control text-monospace" id="aws-output-edges" rows="10">'+ escapeHtml(info.edges) + '</textarea>\
             </div>');
         },
         aws: function (info) {
             return create_node('<h2>Amazon Neptune</h2>\
             <div class="form-group">\
                 <label for="aws-output-nodes">Nodes</label>\
-                <textarea class="form-control" id="aws-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
+                <textarea class="form-control text-monospace" id="aws-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
             </div>\
             <div class="form-group">\
                 <label for="aws-output-edges">Edges</label>\
-                <textarea class="form-control" id="aws-output-edges" rows="10">'+ escapeHtml(info.edges) + '</textarea>\
+                <textarea class="form-control text-monospace" id="aws-output-edges" rows="10">'+ escapeHtml(info.edges) + '</textarea>\
             </div>');
         }
     }
