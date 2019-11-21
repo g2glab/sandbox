@@ -52,3 +52,16 @@ Run:
 
     $ cd sandbox
     $ npm start
+
+
+### Docker-compose with Neo4j
+
+Create and start containers:
+
+    $ docker-compose up -d
+        
+Execute some g2g in your sandbox (http://localhost:8080) and create neo files.
+
+    $ docker-compose exec neo4j bash share/load_into_neo.sh 
+
+Check the result on Neo4j console (http://localhost:7474).

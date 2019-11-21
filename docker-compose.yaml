@@ -1,0 +1,18 @@
+version: '3'
+services:
+  sandbox: 
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./share:/opt/sandbox/static/tmp
+  neo4j:
+    image: neo4j
+    restart: always
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: none 
+    volumes:
+      - ./share:/var/lib/neo4j/share
