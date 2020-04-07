@@ -61,7 +61,7 @@
             </div>');
         },
         pgx: function (info) {
-            return create_node('<h2>Oracle PGX</h2>\
+            return create_node('<h2>Oracle</h2>\
             <div class="form-group">\
                 <label for="aws-output-nodes">Nodes</label>\
                 <textarea class="form-control" id="aws-output-nodes" rows="10">'+ escapeHtml(info.nodes) + '</textarea>\
