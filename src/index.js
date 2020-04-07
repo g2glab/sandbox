@@ -1,11 +1,11 @@
 var example_github_dir = 'https://raw.githubusercontent.com/g2glab/g2g/master/examples/';
 
 var waiting_logos = [
-  '/img/g2g_noisy.png',
-  '/img/g2g_sliding.png',
-  '/img/g2g_turning.png',
-  '/img/g2g_zooming.png',
-  '/img/g2g_fading.png'
+  '/img/g2g_new_noisy.png',
+  '/img/g2g_new_sliding.png',
+  '/img/g2g_new_turning.png',
+  '/img/g2g_new_zooming.png',
+  '/img/g2g_new_fading.png'
 ];
 
 function list_examples(callback) {
@@ -48,7 +48,7 @@ function load_example() {
 function loader(operation) {
   // when we are not starting, we are stopping
   if (operation != 'start') {
-    $('img#logo').attr('src', './img/g2g_static.png');
+    $('img#logo').attr('src', './img/g2g_new_static.png');
     return;
   }
 
