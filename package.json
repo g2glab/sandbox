@@ -11,16 +11,15 @@
     "body-parser": "^1.18.3",
     "child_process": "^1.0.2",
     "express": "^4.16.3",
-    "forever": "^0.15.3",
     "fs": "0.0.1-security",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^0.5.5",
     "rimraf": "^2.6.2"
   },
   "scripts": {
-    "start": "./node_modules/forever/bin/forever start -o server.log src/server.js",
-    "stop": "./node_modules/forever/bin/forever stop src/server.js",
-    "restart": "./node_modules/forever/bin/forever restart src/server.js",
-    "list": "./node_modules/forever/bin/forever list",
+    "start": "./sandbox.sh start",
+    "stop": "./sandbox.sh stop",
+    "restart": "./sandbox.sh restart",
+    "log": "./sandbox.sh log -f",
     "clean": "rm -rf static/tmp/"
   }
 }

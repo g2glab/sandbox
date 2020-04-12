@@ -2,6 +2,7 @@ g2gml/
 node_modules/
 tmp/
 server.log
+proc_id
 npm-debug.log
 
 # ignore editor settings
