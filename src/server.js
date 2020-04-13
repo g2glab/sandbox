@@ -62,7 +62,7 @@ app.post('/g2g/', function (req, res) {
     if (err) { console.log(err); };
     fs.writeFile(g2g_output_g2g, req.body.g2g, function (err) {
       var cmd;
-      var cmd_dot;
+
       if (err) { console.log(err); };
       if (req.body.mode == "endpoint") {
         cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + req.body.endpoint + ' -o ' + g2g_output_dir;
@@ -70,14 +70,20 @@ app.post('/g2g/', function (req, res) {
         fs.writeFile(g2g_output_rdf, req.body.rdf, function (err) {
           if (err) { console.log(err); };
         });
-        cmd_dot = 'dot -Tpng < ' + g2g_output_dot + ' > ' + g2g_output_png;
-        cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + g2g_output_rdf + ' -o ' + g2g_output_dir + ' && ' + cmd_dot;
+
+        cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + g2g_output_rdf + ' -o ' + g2g_output_dir;
+
+        if (format == 'all' || format == 'dot') {
+          cmd += ' && dot -Tpng < ' + g2g_output_dot + ' > ' + g2g_output_png
+        }
       };
       console.log(cmd);
       exec(cmd, (err, stdout, stderr) => {
         console.log(stdout, stderr);
-        if (err) { pg_data = err; };
-        cmd = 'g2g -f ' + format + ' ' + g2g_output_g2g + ' ' + req.body.endpoint + ' -o ' + g2g_output_dir;
+        if (err) { 
+          pg_data = err; 
+        };
+
         var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/' + id };
         returnResult(res, body);
       });
