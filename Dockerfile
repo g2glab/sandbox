@@ -16,4 +16,4 @@ ENV G2GSANDBOX_EXTERNAL_PORT $PORT
 
 RUN npm install
 
-ENTRYPOINT ["node", "src/server.js"]
+CMD ["npm", "start"]
