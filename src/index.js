@@ -196,9 +196,14 @@ $(function () {
     if (e.target.checked) {
       $(".rdf").hide();
       $(".endpoint").show();
+      $(".examples").hide();
+      $("textarea#g2g").val("");
+      $('#output').empty();
     } else {
       $(".rdf").show();
       $(".endpoint").hide();
+      $(".examples").show();
+      load_example();
     };
   });
 
