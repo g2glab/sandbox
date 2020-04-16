@@ -1,10 +1,10 @@
 # G2G Sandbox
 
-`version 0.2.1`
+`version 0.2.2`
 
 ## Web Application
 
-You can find the sandbox at http://g2g.fun
+You can find the sandbox at http://g2gml.fun
 
 ## Local usage
 
@@ -16,11 +16,12 @@ You can run the sandbox using Docker as follows:
       -p 8080:8080 \
       -v $HOME/sandbox_data:/opt/sandbox/static/tmp/ \
       --name sandbox \
-      g2glab/sandbox:0.1.6
+      g2glab/sandbox:0.2.2
 
-Alternatively, you can build an image locally if you have cloned the repository to your machine:
+Alternatively, you can build the image locally:
 
-    $ cd $SANDBOX_PATH
+    $ git clone https://github.com/g2glab/sandbox.git
+    $ cd sandbox
     $ docker build -t g2g_sandbox .
     $ docker run -d \
     -p 8080:8080 \
