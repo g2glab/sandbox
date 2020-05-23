@@ -1,7 +1,5 @@
 // get sandbox listening config from environment
-const g2gsandbox_host = process.env.G2GSANDBOX_EXTERNAL_HOST || "http://localhost";
 const g2gsandbox_port = process.env.G2GSANDBOX_EXTERNAL_PORT || "8080";
-const g2gsandbox_external_url = g2gsandbox_host + ":" + g2gsandbox_port;
 
 // get required packages
 const bodyParser = require('body-parser');
@@ -84,7 +82,7 @@ app.post('/g2g/', function (req, res) {
           pg_data = err; 
         };
 
-        var body = { g2g_output_dir: g2gsandbox_external_url + '/tmp/' + id };
+        var body = { g2g_output_dir: '/tmp/' + id };
         returnResult(res, body);
       });
     });
