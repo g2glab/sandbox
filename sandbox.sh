@@ -16,7 +16,7 @@ start()
         return 1
     fi
 
-    node ./src/server.js 2>&1 | tee server.log &
+    node ./src/server.js 2>&1 | tee -a server.log &
     jobs -p > proc_id                           # save the process ID
     disown                                      # and move to seperate process group
     echo "Sandbox started"
