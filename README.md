@@ -1,6 +1,6 @@
 # G2G Sandbox
 
-`version 0.2.2`
+`version 0.2.3`
 
 ## Web Application
 
@@ -16,7 +16,7 @@ You can run the sandbox using Docker as follows:
       -p 8080:8080 \
       -v $HOME/sandbox_data:/opt/sandbox/static/tmp/ \
       --name sandbox \
-      g2glab/sandbox:0.2.2
+      g2glab/sandbox:0.2.3
 
 Alternatively, you can build the image locally:
 
