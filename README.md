@@ -4,7 +4,7 @@
 
 ## Web Application
 
-You can find the sandbox at http://g2gml.fun
+You can find the sandbox at https://purl.org/g2gml
 
 ## Local usage
 
